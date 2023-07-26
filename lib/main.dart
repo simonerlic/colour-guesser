@@ -148,7 +148,7 @@ class StartPage extends StatelessWidget {
                         SizedBox(
                           width: 8,
                         ),
-                        Text('Debug: Reset day'),
+                        Text('Reset day'),
                       ],
                     ),
                   ),
