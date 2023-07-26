@@ -57,7 +57,7 @@ class _GameViewState extends State<GameView> {
               width: MediaQuery.of(context).size.width * 0.90,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ResultsPage(
