@@ -74,12 +74,13 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ColoredBox(
-          color: color,
-          child: Container(
-            width: 200,
-            height: 200,
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(20),
           ),
+          width: 300,
+          height: 300,
         ),
       ),
       floatingActionButton: FloatingActionButton(

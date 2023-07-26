@@ -23,9 +23,9 @@ Color hashDateToColor(DateTime date) {
   int greenChannel = ((hash >> 8) & 0xFF);
   int blueChannel = ((hash >> 16) & 0xFF);
 
-  print("R: $redChannel");
-  print("G: $greenChannel");
-  print("B: $blueChannel");
+  // print("R: $redChannel");
+  // print("G: $greenChannel");
+  // print("B: $blueChannel");
 
   return Color.fromARGB(255, redChannel, greenChannel, blueChannel);
 }
