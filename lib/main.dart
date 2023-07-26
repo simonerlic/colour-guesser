@@ -1,132 +1,123 @@
 import 'package:flutter/material.dart';
-import 'package:colour/models/hashDateToColor.dart';
-import 'package:colour/views/ColoredBoxWidget.dart';
-import 'package:colour/views/ColorSelectorWidget.dart';
-import 'package:colour/views/ResultsPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:colour/models/hash_date_to_color.dart';
+import 'package:colour/views/game_view.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Colour Guesser',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme:
             ColorScheme.fromSeed(seedColor: hashDateToColor(DateTime.now())),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Colour Guesser'),
+      home: const StartPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class StartPage extends StatelessWidget {
+  const StartPage({Key? key}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+  Future<void> _playGame(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final lastPlayed = prefs.getString('lastPlayed');
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+    final today = DateTime.now();
+    final todayDate = DateTime(today.year, today.month, today.day);
 
-  final String title;
+    if (lastPlayed != null) {
+      final lastPlayedDate = DateTime.parse(lastPlayed);
+      if (lastPlayedDate == todayDate) {
+        // The game has already been played today.
+        // Show a dialog or another kind of message
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("Already Played"),
+            content: Text("You've already played today. Come back tomorrow!"),
+            actions: [
+              ElevatedButton(
+                child: Text("OK"),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+      } else {
+        // The game hasn't been played today.
+        prefs.setString('lastPlayed', todayDate.toIso8601String());
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => GameView()),
+        );
+      }
+    } else {
+      // The game has never been played before.
+      prefs.setString('lastPlayed', todayDate.toIso8601String());
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => GameView()),
+      );
+    }
+  }
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  Future<void> _resetDate(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final nullDate = DateTime(1970, 01, 01);
 
-class _MyHomePageState extends State<MyHomePage> {
-  Color selectedColor = Colors.black;
-  DateTime currentDate = DateTime.now();
+    prefs.setString('lastPlayed', nullDate.toIso8601String());
+  }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    Color color = hashDateToColor(currentDate);
-
     return Scaffold(
-      appBar: AppBar(
-        // use dark primary color from colorScheme for the status bar
-        backgroundColor: Theme.of(context).colorScheme.background,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(15),
-          ),
-        ),
-        title: Text(widget.title),
-        centerTitle: true,
-        titleTextStyle: Theme.of(context).textTheme.headlineSmall,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
+      appBar: AppBar(),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ColoredBoxWidget(
-              color: color,
-            ),
-            ColorPicker(
-              onColorChanged: (color) {
-                setState(() {
-                  selectedColor = color;
-                });
-              },
-            ),
-            Text(
-              selectedColor.toString(),
-            ),
-            // Create a button saying "make guess" that will navigate to the
-            // results page
+            Text("Colour Guesser",
+                style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(
-              height: 30,
+              height: 50,
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.90,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResultsPage(
-                        goalColor: color,
-                        userColor: selectedColor,
-                      ),
-                    ),
-                  );
-                },
-                child: const Text("Make Guess"),
-              ),
-            ),
+            Column(
+              children: <Widget>[
+                ElevatedButton(
+                  child: Text('Play daily game'),
+                  onPressed: () {
+                    _playGame(context);
+                  },
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                ElevatedButton(
+                  child: Text('Info'),
+                  onPressed: () {
+                    // Navigate to Info Page
+                  },
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                ElevatedButton(
+                  child: Text('Debug: Reset day'),
+                  onPressed: () {
+                    _resetDate(context);
+                  },
+                ),
+              ],
+            )
           ],
         ),
       ),

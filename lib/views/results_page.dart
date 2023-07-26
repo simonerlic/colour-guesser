@@ -1,7 +1,7 @@
 // A new page that displays the user's guess and the correct answer
 
 import 'package:flutter/material.dart';
-import 'package:colour/views/SplitColoredBoxWidget.dart';
+import 'package:colour/views/split_colored_box_widget.dart';
 
 class ResultsPage extends StatelessWidget {
   final Color goalColor;
@@ -11,17 +11,21 @@ class ResultsPage extends StatelessWidget {
       {super.key, required this.goalColor, required this.userColor});
 
   int _getScore(Color goalColor, Color userColor) {
+    // Calculate the difference between the goal color and the user's color
     final redDiff = (goalColor.red - userColor.red).abs();
     final greenDiff = (goalColor.green - userColor.green).abs();
     final blueDiff = (goalColor.blue - userColor.blue).abs();
 
+    // Calculate the maximum possible difference (when all color components are 255)
     const maxDiff = 255 * 3;
 
+    // Calculate the total difference between the colors and normalize it to a score within 0 to 100
     final totalDiff = redDiff + greenDiff + blueDiff;
-    final normalizedDiff = (1 - (totalDiff / maxDiff)).clamp(0.0, 1.0);
+    final normalizedDiff = totalDiff / maxDiff;
 
+    // Scale the normalized difference to the desired score range (e.g., 0 to 100)
     const scoreRange = 100;
-    final score = (normalizedDiff * scoreRange).round();
+    final score = ((1 - normalizedDiff) * scoreRange).round();
 
     return score;
   }
