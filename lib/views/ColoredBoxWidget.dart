@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ColoredBoxWidget extends StatelessWidget {
+class ColoredBoxWidget extends StatefulWidget {
   final Color color;
 
   const ColoredBoxWidget({required this.color});
 
+  @override
+  _ColoredBoxWidgetState createState() => _ColoredBoxWidgetState();
+}
+
+class _ColoredBoxWidgetState extends State<ColoredBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -12,7 +17,7 @@ class ColoredBoxWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.90,
         height: MediaQuery.of(context).size.width * 0.90,
         decoration: BoxDecoration(
-          color: color,
+          color: widget.color, // Use the color from the widget's state
           border: Border.all(
             color: Colors.white,
             width: 10,
