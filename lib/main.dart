@@ -42,11 +42,11 @@ class StartPage extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Already Played"),
-            content: Text("You've already played today. Come back tomorrow!"),
+            title: const Text("Already Played"),
+            content: const Text("You've already played today. Come back tomorrow!"),
             actions: [
               ElevatedButton(
-                child: Text("OK"),
+                child: const Text("OK"),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],
@@ -57,7 +57,7 @@ class StartPage extends StatelessWidget {
         prefs.setString('lastPlayed', todayDate.toIso8601String());
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => GameView()),
+          MaterialPageRoute(builder: (context) => const GameView()),
         );
       }
     } else {
@@ -65,7 +65,7 @@ class StartPage extends StatelessWidget {
       prefs.setString('lastPlayed', todayDate.toIso8601String());
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => GameView()),
+        MaterialPageRoute(builder: (context) => const GameView()),
       );
     }
   }
@@ -93,7 +93,7 @@ class StartPage extends StatelessWidget {
             Column(
               children: <Widget>[
                 ElevatedButton(
-                  child: Text('Play daily game'),
+                  child: const Text('Play daily game'),
                   onPressed: () {
                     _playGame(context);
                   },
@@ -102,7 +102,7 @@ class StartPage extends StatelessWidget {
                   height: 8,
                 ),
                 ElevatedButton(
-                  child: Text('Info'),
+                  child: const Text('Info'),
                   onPressed: () {
                     // Navigate to Info Page
                   },
@@ -111,7 +111,7 @@ class StartPage extends StatelessWidget {
                   height: 8,
                 ),
                 ElevatedButton(
-                  child: Text('Debug: Reset day'),
+                  child: const Text('Debug: Reset day'),
                   onPressed: () {
                     _resetDate(context);
                   },

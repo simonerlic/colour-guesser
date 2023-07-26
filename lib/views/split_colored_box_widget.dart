@@ -5,7 +5,7 @@ class SplitColoredBoxWidget extends StatefulWidget {
   final Color userColor;
 
   const SplitColoredBoxWidget(
-      {required this.goalColor, required this.userColor});
+      {super.key, required this.goalColor, required this.userColor});
 
   @override
   _SplitColoredBoxWidgetState createState() => _SplitColoredBoxWidgetState();

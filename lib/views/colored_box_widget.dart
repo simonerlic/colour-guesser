@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ColoredBoxWidget extends StatefulWidget {
   final Color color;
 
-  const ColoredBoxWidget({required this.color});
+  const ColoredBoxWidget({super.key, required this.color});
 
   @override
   _ColoredBoxWidgetState createState() => _ColoredBoxWidgetState();

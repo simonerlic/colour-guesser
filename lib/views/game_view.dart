@@ -5,7 +5,7 @@ import 'package:colour/views/color_selector_widget.dart';
 import 'package:colour/views/results_page.dart';
 
 class GameView extends StatefulWidget {
-  GameView({Key? key}) : super(key: key);
+  const GameView({Key? key}) : super(key: key);
 
   @override
   _GameViewState createState() => _GameViewState();
@@ -27,7 +27,7 @@ class _GameViewState extends State<GameView> {
             bottom: Radius.circular(15),
           ),
         ),
-        title: Text('Colour Guesser'),
+        title: const Text('Colour Guesser'),
         centerTitle: true,
         titleTextStyle: Theme.of(context).textTheme.headlineSmall,
       ),
