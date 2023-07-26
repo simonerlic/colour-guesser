@@ -43,7 +43,8 @@ class StartPage extends StatelessWidget {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text("Already Played"),
-            content: const Text("You've already played today. Come back tomorrow!"),
+            content:
+                const Text("You've already played today. Come back tomorrow!"),
             actions: [
               ElevatedButton(
                 child: const Text("OK"),
@@ -92,29 +93,65 @@ class StartPage extends StatelessWidget {
             ),
             Column(
               children: <Widget>[
-                ElevatedButton(
-                  child: const Text('Play daily game'),
-                  onPressed: () {
-                    _playGame(context);
-                  },
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.60,
+                  child: ElevatedButton(
+                    child: const Text('Daily Challenge'),
+                    onPressed: () {
+                      _playGame(context);
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 8,
                 ),
-                ElevatedButton(
-                  child: const Text('Info'),
-                  onPressed: () {
-                    // Navigate to Info Page
-                  },
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.60,
+                  child: ElevatedButton(
+                    child: const Text('Random Challenge'),
+                    onPressed: () {
+                      _playGame(context);
+                    },
+                  ),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 50,
                 ),
-                ElevatedButton(
-                  child: const Text('Debug: Reset day'),
-                  onPressed: () {
-                    _resetDate(context);
-                  },
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.60,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _resetDate(context);
+
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text("Cleared Date"),
+                          content: const Text("Thanks for testing :)"),
+                          actions: [
+                            ElevatedButton(
+                              child: const Text("OK"),
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.bug_report),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text('Debug: Reset day'),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             )
