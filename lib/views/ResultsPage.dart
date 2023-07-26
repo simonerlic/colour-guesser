@@ -1,12 +1,35 @@
 // A new page that displays the user's guess and the correct answer
 
 import 'package:flutter/material.dart';
+import 'package:colour/views/SplitColoredBoxWidget.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({Key? key}) : super(key: key);
+  final Color goalColor;
+  final Color userColor;
+
+  const ResultsPage(
+      {super.key, required this.goalColor, required this.userColor});
+
+  int _getScore(Color goalColor, Color userColor) {
+    final redDiff = (goalColor.red - userColor.red).abs();
+    final greenDiff = (goalColor.green - userColor.green).abs();
+    final blueDiff = (goalColor.blue - userColor.blue).abs();
+
+    const maxDiff = 255 * 3;
+
+    final totalDiff = redDiff + greenDiff + blueDiff;
+    final normalizedDiff = (1 - (totalDiff / maxDiff)).clamp(0.0, 1.0);
+
+    const scoreRange = 100;
+    final score = (normalizedDiff * scoreRange).round();
+
+    return score;
+  }
 
   @override
   Widget build(BuildContext context) {
+    int score = _getScore(goalColor, userColor);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor:
@@ -23,16 +46,25 @@ class ResultsPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text("Your guess was:"),
-            const SizedBox(
-              height: 10,
+            SplitColoredBoxWidget(
+              goalColor: goalColor,
+              userColor: userColor,
             ),
-            const Text("The correct answer was:"),
             const SizedBox(
-              height: 30,
+              height: 16,
+            ),
+            Column(
+              // Left align text
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Results",
+                    style: Theme.of(context).textTheme.headlineSmall),
+                Text("You got $score points!")
+              ],
+            ),
+            const SizedBox(
+              height: 16,
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.90,
@@ -40,7 +72,7 @@ class ResultsPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text("Play Again"),
+                child: const Text("Back"),
               ),
             ),
           ],

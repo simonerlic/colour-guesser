@@ -64,19 +64,29 @@ class _ColorPickerState extends State<ColorPicker> {
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: Slider(
-            value: value,
-            onChanged: onChanged,
-            min: 0.0,
-            max: 255.0,
-            divisions: 255,
-            label: '$value',
+          child: SliderTheme(
+            data: const SliderThemeData(
+              trackHeight:
+                  2.0, // Optional: Adjust the track height to your preference
+            ),
+            child: Slider(
+              value: value,
+              onChanged: onChanged,
+              min: 0.0,
+              max: 255.0,
+              divisions: 255,
+              label: '$value',
+            ),
           ),
         ),
         const SizedBox(width: 16),
-        Text(
-          value.toInt().toString(),
-          style: const TextStyle(fontSize: 18),
+        SizedBox(
+          width: 50, // Adjust the width as needed
+          child: Text(
+            value.toInt().toString(),
+            style: const TextStyle(fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );

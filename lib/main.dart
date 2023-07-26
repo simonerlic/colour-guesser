@@ -60,7 +60,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color selectedColor = Colors.blue;
+  Color selectedColor = Colors.black;
   DateTime currentDate = DateTime.now();
 
   @override
@@ -75,8 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:
-            Colors.white, //Theme.of(context).colorScheme.inversePrimary,
+        // use dark primary color from colorScheme for the status bar
+        backgroundColor: Theme.of(context).colorScheme.background,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),
@@ -117,7 +117,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ResultsPage(),
+                      builder: (context) => ResultsPage(
+                        goalColor: color,
+                        userColor: selectedColor,
+                      ),
                     ),
                   );
                 },
