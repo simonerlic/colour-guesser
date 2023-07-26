@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:colour/views/split_colored_box_widget.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ResultsPage extends StatelessWidget {
   final Color goalColor;
@@ -50,6 +51,7 @@ class ResultsPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SplitColoredBoxWidget(
               goalColor: goalColor,
@@ -58,25 +60,81 @@ class ResultsPage extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            Column(
-              // Left align text
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Results",
-                    style: Theme.of(context).textTheme.headlineSmall),
-                Text("You got $score points!")
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.90,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                },
-                child: const Text("Back"),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Score",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall),
+                              Text("You got $score points!"),
+                            ],
+                          ),
+                          const Spacer(),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.18,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Share.share(
+                                      "Can you beat my score? https://colors.serlic.dev",
+                                      subject:
+                                          'I got $score points in Colour Guesser!');
+                                },
+                                child: const Icon(Icons.share)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          "Your Color: rgb(${userColor.red}, ${userColor.green}, ${userColor.blue})"),
+                      Text(
+                          "Goal Color: rgb(${goalColor.red}, ${goalColor.green}, ${goalColor.blue})"),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Text("𝚫🟥: ${(goalColor.red - userColor.red).abs()}"),
+                      Text(
+                          "𝚫🟩: ${(goalColor.green - userColor.green).abs()}"),
+                      Text("𝚫🟦: ${(goalColor.blue - userColor.blue).abs()}"),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.87,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .popUntil((route) => route.isFirst);
+                          },
+                          child: const Text("Done"),
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
