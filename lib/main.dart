@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:colour/models/hashDateToColor.dart';
 import 'package:colour/views/ColoredBoxWidget.dart';
 import 'package:colour/views/ColorSelectorWidget.dart';
+import 'package:colour/views/ResultsPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -104,7 +105,25 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               selectedColor.toString(),
             ),
-            // Text($_selectedColor),
+            // Create a button saying "make guess" that will navigate to the
+            // results page
+            const SizedBox(
+              height: 30,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.90,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ResultsPage(),
+                    ),
+                  );
+                },
+                child: const Text("Make Guess"),
+              ),
+            ),
           ],
         ),
       ),
