@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:colour/models/hashDateToColor.dart';
+import 'package:colour/views/ColoredBoxWidget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Colour Guesser'),
     );
   }
 }
@@ -70,17 +71,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(20),
+        backgroundColor:
+            Colors.white, //Theme.of(context).colorScheme.inversePrimary,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(15),
           ),
-          width: 300,
-          height: 300,
+        ),
+        title: Text(widget.title),
+        centerTitle: true,
+        titleTextStyle: Theme.of(context).textTheme.headlineSmall,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            ColoredBoxWidget(
+              color: color,
+            ),
+            Text(
+              'The colour is: $color',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
