@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:colour/models/hashDateToColor.dart';
 import 'package:colour/views/ColoredBoxWidget.dart';
+import 'package:colour/views/ColorSelectorWidget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: hashDateToColor(DateTime.now())),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Colour Guesser'),
@@ -69,6 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
     DateTime currentDate = DateTime.now();
     Color color = hashDateToColor(currentDate);
 
+    Color selectedColor = Colors.blue;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor:
@@ -89,22 +93,19 @@ class _MyHomePageState extends State<MyHomePage> {
             ColoredBoxWidget(
               color: color,
             ),
-            Text(
-              'The colour is: $color',
-              style: Theme.of(context).textTheme.headlineMedium,
+            ColorPicker(
+              onColorChanged: (color) {
+                setState(() {
+                  selectedColor = color;
+                });
+              },
             ),
+            ColoredBoxWidget(
+              color: selectedColor,
+            ),
+            // Text($_selectedColor),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            currentDate = DateTime.now();
-            color = hashDateToColor(currentDate);
-          });
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
