@@ -59,6 +59,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Color selectedColor = Colors.blue;
+  DateTime currentDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -67,11 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-
-    DateTime currentDate = DateTime.now();
     Color color = hashDateToColor(currentDate);
-
-    Color selectedColor = Colors.blue;
 
     return Scaffold(
       appBar: AppBar(
@@ -89,6 +88,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ColoredBoxWidget(
               color: color,
@@ -100,8 +101,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
             ),
-            ColoredBoxWidget(
-              color: selectedColor,
+            Text(
+              selectedColor.toString(),
             ),
             // Text($_selectedColor),
           ],
