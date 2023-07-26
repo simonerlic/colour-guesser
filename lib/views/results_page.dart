@@ -74,7 +74,7 @@ class ResultsPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.90,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 child: const Text("Back"),
               ),
