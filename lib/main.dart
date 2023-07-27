@@ -18,9 +18,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chromanigma',
       theme: ThemeData(
+        fontFamily: 'Lexend',
         colorScheme:
             ColorScheme.fromSeed(seedColor: hashDateToColor(DateTime.now())),
         useMaterial3: true,
+
+        // Define the default TextTheme. Use Lexend-Regular for the body and Lexend-Medium for the title.
+        textTheme: const TextTheme(
+          bodySmall:
+              TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w400),
+          // I want to use a colour from colorScheme to set the headlineMedium color
+          headlineMedium:
+              TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w500),
+        ),
       ),
       home: const StartPage(),
     );
@@ -178,7 +188,9 @@ class _StartPageState extends State<StartPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Chromanigma", style: Theme.of(context).textTheme.headline5),
+            Text("Chromanigma",
+                // Use Lexend-Medium for the title
+                style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 50),
             Column(
               children: <Widget>[

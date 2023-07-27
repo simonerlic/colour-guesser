@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:colour/models/game_result.dart';
 import 'package:colour/views/split_colored_box_widget.dart';
+import 'package:colour/views/results_page.dart';
 import 'package:intl/intl.dart';
 
 class GalleryPage extends StatefulWidget {
@@ -63,9 +64,22 @@ class _GalleryPageState extends State<GalleryPage> {
                 return Column(
                   children: [
                     Expanded(
-                      child: SplitColoredBoxWidget(
-                        goalColor: _gameResults![index].actualColor,
-                        userColor: _gameResults![index].guessedColor,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultsPage(
+                                goalColor: _gameResults![index].actualColor,
+                                userColor: _gameResults![index].guessedColor,
+                              ),
+                            ),
+                          );
+                        },
+                        child: SplitColoredBoxWidget(
+                          goalColor: _gameResults![index].actualColor,
+                          userColor: _gameResults![index].guessedColor,
+                        ),
                       ),
                     ),
                     Text(

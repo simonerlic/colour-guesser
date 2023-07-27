@@ -89,3 +89,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Lexend
+      fonts:
+        - asset: lib/fonts/Lexend-Regular.ttf
+          weight: 400
+        - asset: lib/fonts/Lexend-Medium.ttf
+          weight: 500
