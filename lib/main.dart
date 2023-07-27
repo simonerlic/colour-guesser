@@ -201,7 +201,7 @@ class _StartPageState extends State<StartPage> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.60,
                   child: ElevatedButton(
-                    child: const Text('Random Challenge'),
+                    child: const Text('Practice Challenge'),
                     onPressed: () {
                       _playGame(context, true);
                     },
@@ -217,7 +217,7 @@ class _StartPageState extends State<StartPage> {
                         MaterialPageRoute(builder: (context) => GalleryPage()),
                       );
                     },
-                    child: const Text('View Past Attempts'),
+                    child: const Text('Past Daily Challenges'),
                   ),
                 ),
                 const SizedBox(height: 50),
