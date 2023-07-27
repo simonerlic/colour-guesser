@@ -62,13 +62,15 @@ class _GalleryPageState extends State<GalleryPage> {
               itemBuilder: (context, index) {
                 return Column(
                   children: [
-                    SplitColoredBoxWidget(
-                      goalColor: _gameResults![index].actualColor,
-                      userColor: _gameResults![index].guessedColor,
+                    Expanded(
+                      child: SplitColoredBoxWidget(
+                        goalColor: _gameResults![index].actualColor,
+                        userColor: _gameResults![index].guessedColor,
+                      ),
                     ),
                     Text(
                       DateFormat.yMMMd().format(_gameResults![index].date),
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 );
