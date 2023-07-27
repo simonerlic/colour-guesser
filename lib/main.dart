@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
 class StartPage extends StatelessWidget {
   const StartPage({Key? key}) : super(key: key);
 
-  Future<void> _playGame(BuildContext context) async {
+  Future<void> _playGame(BuildContext context, bool useRandomDate) async {
     final prefs = await SharedPreferences.getInstance();
     final lastPlayed = prefs.getString('lastPlayed');
 
@@ -36,7 +36,7 @@ class StartPage extends StatelessWidget {
 
     if (lastPlayed != null) {
       final lastPlayedDate = DateTime.parse(lastPlayed);
-      if (lastPlayedDate == todayDate) {
+      if (lastPlayedDate == todayDate && !useRandomDate) {
         // The game has already been played today.
         // Show a dialog or another kind of message
         showDialog(
@@ -58,7 +58,8 @@ class StartPage extends StatelessWidget {
         prefs.setString('lastPlayed', todayDate.toIso8601String());
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GameView()),
+          MaterialPageRoute(
+              builder: (context) => GameView(useRandomDate: useRandomDate)),
         );
       }
     } else {
@@ -66,7 +67,8 @@ class StartPage extends StatelessWidget {
       prefs.setString('lastPlayed', todayDate.toIso8601String());
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const GameView()),
+        MaterialPageRoute(
+            builder: (context) => GameView(useRandomDate: useRandomDate)),
       );
     }
   }
@@ -98,7 +100,7 @@ class StartPage extends StatelessWidget {
                   child: ElevatedButton(
                     child: const Text('Daily Challenge'),
                     onPressed: () {
-                      _playGame(context);
+                      _playGame(context, false);
                     },
                   ),
                 ),
@@ -110,7 +112,7 @@ class StartPage extends StatelessWidget {
                   child: ElevatedButton(
                     child: const Text('Random Challenge'),
                     onPressed: () {
-                      _playGame(context);
+                      _playGame(context, true);
                     },
                   ),
                 ),
