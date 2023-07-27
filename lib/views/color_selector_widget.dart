@@ -67,7 +67,7 @@ class _ColorPickerState extends State<ColorPicker> {
           child: SliderTheme(
             data: const SliderThemeData(
               trackHeight:
-                  2.0, // Optional: Adjust the track height to your preference
+                  3.0, // Optional: Adjust the track height to your preference
             ),
             child: Slider(
               value: value,

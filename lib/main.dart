@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:colour/models/hash_date_to_color.dart';
 import 'package:colour/views/game_view.dart';
+import 'package:colour/views/gallery_page.dart';
+import 'package:colour/models/game_result.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Colour Guesser',
+      title: 'Chromanigma',
       theme: ThemeData(
         colorScheme:
             ColorScheme.fromSeed(seedColor: hashDateToColor(DateTime.now())),
@@ -176,8 +178,7 @@ class _StartPageState extends State<StartPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Colour Guesser",
-                style: Theme.of(context).textTheme.headline5),
+            Text("Chromanigma", style: Theme.of(context).textTheme.headline5),
             const SizedBox(height: 50),
             Column(
               children: <Widget>[
@@ -206,12 +207,26 @@ class _StartPageState extends State<StartPage> {
                     },
                   ),
                 ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.60,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => GalleryPage()),
+                      );
+                    },
+                    child: const Text('View Past Attempts'),
+                  ),
+                ),
                 const SizedBox(height: 50),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.60,
                   child: ElevatedButton(
                     onPressed: () {
                       _resetDate(context);
+                      GameResult.clearGameResults();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,

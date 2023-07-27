@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,8 @@ import 'package:colour/models/hash_date_to_color.dart';
 import 'package:colour/views/colored_box_widget.dart';
 import 'package:colour/views/color_selector_widget.dart';
 import 'package:colour/views/results_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:colour/models/game_result.dart';
 
 class GameView extends StatefulWidget {
   final bool useRandomDate;
@@ -46,7 +49,7 @@ class _GameViewState extends State<GameView> {
             bottom: Radius.circular(15),
           ),
         ),
-        title: const Text('Colour Guesser'),
+        title: const Text('Make a Guess'),
         centerTitle: true,
         titleTextStyle: Theme.of(context).textTheme.headlineSmall,
       ),
@@ -76,6 +79,10 @@ class _GameViewState extends State<GameView> {
               width: MediaQuery.of(context).size.width * 0.90,
               child: ElevatedButton(
                 onPressed: () {
+                  if (!widget.useRandomDate) {
+                    saveResult();
+                  }
+
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -93,5 +100,20 @@ class _GameViewState extends State<GameView> {
         ),
       ),
     );
+  }
+
+  Future<void> saveResult() async {
+    final prefs = await SharedPreferences.getInstance();
+    final gameResultsJson = prefs.getStringList('gameResults') ?? [];
+
+    final gameResult = GameResult(
+      date: DateTime.now(),
+      actualColor: hashDateToColor(currentDate),
+      guessedColor: selectedColor,
+    );
+
+    gameResultsJson.add(jsonEncode(gameResult.toMap()));
+
+    await prefs.setStringList('gameResults', gameResultsJson);
   }
 }

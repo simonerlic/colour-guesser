@@ -1,5 +1,3 @@
-// A new page that displays the user's guess and the correct answer
-
 import 'package:flutter/material.dart';
 import 'package:colour/views/split_colored_box_widget.dart';
 import 'package:share_plus/share_plus.dart';
@@ -8,8 +6,11 @@ class ResultsPage extends StatelessWidget {
   final Color goalColor;
   final Color userColor;
 
-  const ResultsPage(
-      {super.key, required this.goalColor, required this.userColor});
+  const ResultsPage({
+    Key? key,
+    required this.goalColor,
+    required this.userColor,
+  }) : super(key: key);
 
   int _getScore(Color goalColor, Color userColor) {
     // Calculate the difference between the goal color and the user's color
@@ -122,7 +123,7 @@ class ResultsPage extends StatelessWidget {
                     children: [
                       const Spacer(),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.87,
+                        width: MediaQuery.of(context).size.width * 0.86,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.of(context)
