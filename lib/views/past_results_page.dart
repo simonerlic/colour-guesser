@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:colour/views/split_colored_box_widget.dart';
-import 'package:share_plus/share_plus.dart';
 
-class ResultsPage extends StatelessWidget {
+class PastResultsPage extends StatelessWidget {
   final Color goalColor;
   final Color userColor;
+  final String guessDate;
 
-  const ResultsPage({
+  const PastResultsPage({
     Key? key,
     required this.goalColor,
     required this.userColor,
+    required this.guessDate,
   }) : super(key: key);
 
   int _getScore(Color goalColor, Color userColor) {
@@ -38,17 +39,17 @@ class ResultsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor:
-              Colors.white, //Theme.of(context).colorScheme.inversePrimary,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(15),
-            ),
+        backgroundColor:
+            Colors.white, //Theme.of(context).colorScheme.inversePrimary,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(15),
           ),
-          title: const Text("Results"),
-          centerTitle: true,
-          titleTextStyle: Theme.of(context).textTheme.headlineSmall,
-          automaticallyImplyLeading: false),
+        ),
+        title: Text("Guess from $guessDate"),
+        centerTitle: true,
+        titleTextStyle: Theme.of(context).textTheme.headlineSmall,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -81,18 +82,18 @@ class ResultsPage extends StatelessWidget {
                               Text("You got $score points!"),
                             ],
                           ),
-                          const Spacer(),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.18,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  Share.share(
-                                      "Can you beat my score? https://chromanigma.serlic.dev",
-                                      subject:
-                                          'I got $score points in Chromanigma!');
-                                },
-                                child: const Icon(Icons.share)),
-                          ),
+                          // const Spacer(),
+                          // SizedBox(
+                          //   width: MediaQuery.of(context).size.width * 0.18,
+                          //   child: ElevatedButton(
+                          //       onPressed: () {
+                          //         Share.share(
+                          //             "Can you beat my score? https://chromanigma.serlic.dev",
+                          //             subject:
+                          //                 'I got $score points in Chromanigma!');
+                          //       },
+                          //       child: const Icon(Icons.share)),
+                          // ),
                         ],
                       ),
                     ],
@@ -126,8 +127,7 @@ class ResultsPage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.86,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context)
-                                .popUntil((route) => route.isFirst);
+                            Navigator.of(context).pop();
                           },
                           child: const Text("Done"),
                         ),
