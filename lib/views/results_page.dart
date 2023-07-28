@@ -86,8 +86,13 @@ class ResultsPage extends StatelessWidget {
                             width: MediaQuery.of(context).size.width * 0.18,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Share.share(
-                                      "Can you beat my score? https://chromanigma.serlic.dev",
+                                  Share.share("""
+Δ🟥: ${(goalColor.red - userColor.red).abs()}
+Δ🟩: ${(goalColor.green - userColor.green).abs()}
+Δ🟦: ${(goalColor.blue - userColor.blue).abs()}
+
+Score: $score
+Can you beat my score? https://chromanigma.serlic.dev""",
                                       subject:
                                           'I got $score points in Chromanigma!');
                                 },
