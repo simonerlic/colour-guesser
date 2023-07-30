@@ -5,7 +5,7 @@ import 'package:colour/models/hash_date_to_color.dart';
 import 'package:colour/views/game_view.dart';
 import 'package:colour/views/gallery_page.dart';
 import 'package:colour/models/game_result.dart';
-// import 'package:colour/views/tutorial_view.dart';
+import 'package:colour/views/tutorial/tutorial_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -183,7 +183,33 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        // Add an info button to the app bar
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.question_mark_outlined),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  // go to tutorial page
+                  builder: (context) => TutorialPage()
+
+                  // builder: (context) => AlertDialog(
+                  //   title: const Text("About"),
+                  //   content: const Text(
+                  //       "Chromanigma is a game where you have to guess the date of a color."),
+                  //   actions: [
+                  //     ElevatedButton(
+                  //       child: const Text("OK"),
+                  //       onPressed: () => Navigator.of(context).pop(),
+                  //     ),
+                  //   ],
+                  // ),
+                  );
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
