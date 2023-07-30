@@ -5,6 +5,7 @@ import 'package:colour/models/hash_date_to_color.dart';
 import 'package:colour/views/game_view.dart';
 import 'package:colour/views/gallery_page.dart';
 import 'package:colour/models/game_result.dart';
+// import 'package:colour/views/tutorial_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,6 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           bodySmall:
               TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w400),
-          // I want to use a colour from colorScheme to set the headlineMedium color
           headlineMedium:
               TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w500),
         ),
