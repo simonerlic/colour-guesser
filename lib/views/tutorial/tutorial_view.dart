@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:colour/main.dart'; // Don't forget to import your StartPage
+import 'package:colour/views/tutorial/slider_tutorial_view.dart';
 
 class TutorialPage extends StatelessWidget {
   const TutorialPage({Key? key}) : super(key: key);
@@ -11,29 +11,38 @@ class TutorialPage extends StatelessWidget {
         title: const Text('Tutorial'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Welcome to Chromanigma!',
-              style: TextStyle(fontSize: 24),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'This is your first time using the app, so let\'s walk through a quick tutorial.',
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              child: const Text('Continue to app'),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const StartPage()),
-                );
-              },
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Welcome!',
+                style: TextStyle(fontSize: 24),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'This tutorial will teach you the basics of creating colours, and how to play the game.',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Are you ready? Press the button below to start the tutorial.',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                child: const Text('Next'),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SliderTutorialView()),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

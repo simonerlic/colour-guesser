@@ -192,7 +192,7 @@ class _StartPageState extends State<StartPage> {
               showDialog(
                   context: context,
                   // go to tutorial page
-                  builder: (context) => TutorialPage()
+                  builder: (context) => const TutorialPage()
 
                   // builder: (context) => AlertDialog(
                   //   title: const Text("About"),
@@ -252,7 +252,8 @@ class _StartPageState extends State<StartPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => GalleryPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const GalleryPage()),
                       );
                     },
                     child: const Text('Past Daily Challenges'),

@@ -30,19 +30,19 @@ class _ColorPickerState extends State<ColorPicker> {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          _buildSliderRow('R', _redValue, (value) {
+          _buildSliderRow('🟥', _redValue, (value) {
             setState(() {
               _redValue = value;
               _updateColor();
             });
           }),
-          _buildSliderRow('G', _greenValue, (value) {
+          _buildSliderRow('🟩', _greenValue, (value) {
             setState(() {
               _greenValue = value;
               _updateColor();
             });
           }),
-          _buildSliderRow('B', _blueValue, (value) {
+          _buildSliderRow('🟦', _blueValue, (value) {
             setState(() {
               _blueValue = value;
               _updateColor();
@@ -67,14 +67,13 @@ class _ColorPickerState extends State<ColorPicker> {
           child: SliderTheme(
             data: const SliderThemeData(
               trackHeight:
-                  3.0, // Optional: Adjust the track height to your preference
+                  2.0, // Optional: Adjust the track height to your preference
             ),
             child: Slider(
               value: value,
               onChanged: onChanged,
               min: 0.0,
               max: 255.0,
-              divisions: 255,
               label: '$value',
             ),
           ),
