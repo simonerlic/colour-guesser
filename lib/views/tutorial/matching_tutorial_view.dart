@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:colour/views/color_selector_widget.dart';
 import 'package:colour/views/split_colored_box_widget.dart';
 
+import 'package:colour/views/tutorial/tutorial_results_page.dart';
+
 class MatchingTutorialView extends StatefulWidget {
   const MatchingTutorialView({Key? key}) : super(key: key);
 
@@ -25,19 +27,20 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          // only horizontal padding
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: "In this game, you'll",
+                        text: "The goal of this game is to",
                         style: Theme.of(context).textTheme.bodyMedium,
                         children: const <TextSpan>[
                           TextSpan(
@@ -48,14 +51,14 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                           ),
                           TextSpan(
                             text:
-                                " try to replicate a colour shown to you by only using the sliders.",
+                                " replicate a colour shown to you by only using the sliders.",
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      "Since this is a tutorial, I'll show you the colour as you make it- but normally, you'll only see the colour you've created once you've submitted your guess.",
+                      "Since it's a tutorial, I'll show you your colour as you move the sliders. Then, make the guess when you're ready.",
                     ),
                   ],
                 ),
@@ -78,14 +81,22 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                 },
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                child: const Text('Next'),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Text('TODO')),
-                  );
-                },
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.90,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TutorialResultsPage(
+                          goalColor: Colors.lime,
+                          userColor: selectedColor,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text("Make Guess"),
+                ),
               ),
             ],
             // Fill up bottom space

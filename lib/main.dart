@@ -189,23 +189,10 @@ class _StartPageState extends State<StartPage> {
           IconButton(
             icon: const Icon(Icons.question_mark_outlined),
             onPressed: () {
-              showDialog(
-                  context: context,
-                  // go to tutorial page
-                  builder: (context) => const TutorialPage()
-
-                  // builder: (context) => AlertDialog(
-                  //   title: const Text("About"),
-                  //   content: const Text(
-                  //       "Chromanigma is a game where you have to guess the date of a color."),
-                  //   actions: [
-                  //     ElevatedButton(
-                  //       child: const Text("OK"),
-                  //       onPressed: () => Navigator.of(context).pop(),
-                  //     ),
-                  //   ],
-                  // ),
-                  );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TutorialPage()),
+              );
             },
           ),
         ],

@@ -39,7 +39,7 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                     RichText(
                       text: TextSpan(
                         text:
-                            "There's a lot of theory behind how colours are created, but for now, just know that each colour is made up of a combination of",
+                            "There's a lot of theory behind how colours are created, but for now, all you need to know is that each colour is made up of a combination of",
                         style: Theme.of(context).textTheme.bodyMedium,
                         children: const <TextSpan>[
                           TextSpan(
@@ -77,7 +77,7 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      "Try moving the sliders below to see how the box colour changes! When you're ready, press the Next button to continue.",
+                      'Try moving the sliders below to see how the values affect the colours! When you\'re ready, press the "Next" button to continue.',
                     )
                   ],
                 ),

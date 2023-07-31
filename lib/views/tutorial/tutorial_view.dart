@@ -22,17 +22,17 @@ class TutorialPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text(
-                'This tutorial will teach you the basics of creating colours, and how to play the game.',
+                'This tutorial will go over a little bit of the fundamentals of colour and the game itself.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               const Text(
-                'Are you ready? Press the button below to start the tutorial.',
+                'Press the button below to start the tutorial.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                child: const Text('Next'),
+                child: const Text('Let\'s go!'),
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
