@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:colour/views/tutorial/slider_tutorial_view.dart';
 
 class FinishTutorialPage extends StatelessWidget {
   const FinishTutorialPage({Key? key}) : super(key: key);
