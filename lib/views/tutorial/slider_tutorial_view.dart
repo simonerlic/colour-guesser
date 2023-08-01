@@ -76,7 +76,7 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Try moving the sliders below to see how the values affect the colours. When you feel that you have a handle on things, press the "Next" button to continue.',
+                      'Try moving the sliders below to see how the values affect the colours! When you feel that you have a handle on things, press the "Next" button to continue.',
                     )
                   ],
                 ),
