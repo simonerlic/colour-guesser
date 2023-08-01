@@ -52,6 +52,7 @@ class _StartPageState extends State<StartPage> {
   void initState() {
     super.initState();
     checkIfDailyChallengePlayed();
+    checkIfTutorialPlayed();
   }
 
   @override
@@ -74,6 +75,21 @@ class _StartPageState extends State<StartPage> {
 
     if (!hasPlayedDailyChallenge) {
       setNextDailyChallengeTimer();
+    }
+  }
+
+  Future<void> checkIfTutorialPlayed() async {
+    final prefs = await SharedPreferences.getInstance();
+    final tutorialPlayed = prefs.getBool('tutorialPlayed');
+
+    if (tutorialPlayed == null || !tutorialPlayed) {
+      prefs.setBool('tutorialPlayed', true);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const TutorialPage(),
+        ),
+      );
     }
   }
 
@@ -156,10 +172,6 @@ class _StartPageState extends State<StartPage> {
   Future<void> _resetDate(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     final nullDate = DateTime(1970, 01, 01);
-    prefs.setString('lastPlayed', nullDate.toIso8601String());
-    setState(() {
-      hasPlayedDailyChallenge = false;
-    });
 
     Future<void> showClearedDateDialog() async {
       await showDialog(
@@ -169,7 +181,14 @@ class _StartPageState extends State<StartPage> {
           actions: [
             ElevatedButton(
               child: const Text("OK"),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                prefs.setString('lastPlayed', nullDate.toIso8601String());
+                prefs.setBool('tutorialPlayed', false);
+                setState(() {
+                  hasPlayedDailyChallenge = false;
+                });
+                Navigator.of(context).pop();
+              },
             ),
           ],
         ),
@@ -196,6 +215,8 @@ class _StartPageState extends State<StartPage> {
             },
           ),
         ],
+        // hide the back button
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(
@@ -243,29 +264,11 @@ class _StartPageState extends State<StartPage> {
                             builder: (context) => const GalleryPage()),
                       );
                     },
-                    child: const Text('Past Daily Challenges'),
-                  ),
-                ),
-                const SizedBox(height: 50),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.60,
-                  child: ElevatedButton(
-                    onPressed: () {
+                    onLongPress: () {
                       _resetDate(context);
                       GameResult.clearGameResults();
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.bug_report),
-                        SizedBox(width: 8),
-                        Text('Reset day'),
-                      ],
-                    ),
+                    child: const Text('Past Daily Challenges'),
                   ),
                 ),
               ],

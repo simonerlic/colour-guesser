@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:colour/main.dart';
 
 class FinishTutorialPage extends StatelessWidget {
   const FinishTutorialPage({Key? key}) : super(key: key);
@@ -28,7 +29,12 @@ class FinishTutorialPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text(
-                'This tutorial will always be available via\nthe "?" button on the top right corner of the home screen.',
+                'This tutorial will always be available via\nthe "?" icon on the top right corner of the home screen.',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Good luck, and have fun!',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
@@ -39,10 +45,11 @@ class FinishTutorialPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.82,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute<StartPage>(
+                                builder: (_) => const StartPage()));
                       },
-                      child: const Text("Cool!"),
+                      child: const Text("Thanks!"),
                     ),
                   ),
                   const Spacer(),
