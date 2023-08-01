@@ -20,6 +20,13 @@ class _SplitColoredBoxWidgetState extends State<SplitColoredBoxWidget> {
         height: MediaQuery.of(context).size.width * 0.90,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+            ),
+          ],
         ),
         child: Row(
           children: [

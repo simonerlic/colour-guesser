@@ -18,10 +18,6 @@ class _ColoredBoxWidgetState extends State<ColoredBoxWidget> {
         height: MediaQuery.of(context).size.width * 0.90,
         decoration: BoxDecoration(
           color: widget.color, // Use the color from the widget's state
-          border: Border.all(
-            color: Colors.white,
-            width: 10,
-          ),
           // shadow
           boxShadow: [
             BoxShadow(

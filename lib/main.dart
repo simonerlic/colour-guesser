@@ -24,8 +24,9 @@ class MyApp extends StatelessWidget {
       title: 'Chromanigma',
       theme: ThemeData(
         fontFamily: 'Lexend',
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: hashDateToColor(DateTime.now())),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: hashDateToColor(DateTime.now()),
+            brightness: Brightness.light),
         useMaterial3: true,
 
         // Define the default TextTheme. Use Lexend-Regular for the body and Lexend-Medium for the title.
@@ -36,6 +37,22 @@ class MyApp extends StatelessWidget {
               TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w500),
         ),
       ),
+      darkTheme: ThemeData(
+        fontFamily: 'Lexend',
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: hashDateToColor(DateTime.now()),
+            brightness: Brightness.dark),
+        useMaterial3: true,
+
+        // Define the default TextTheme. Use Lexend-Regular for the body and Lexend-Medium for the title.
+        textTheme: const TextTheme(
+          bodySmall:
+              TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w400),
+          headlineMedium:
+              TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w500),
+        ),
+      ),
+      themeMode: ThemeMode.system,
       home: const StartPage(),
     );
   }
@@ -251,7 +268,13 @@ class _StartPageState extends State<StartPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          hasPlayedDailyChallenge ? Colors.grey.shade200 : null,
+                          // theme colour, but with 20% opacity if the daily challenge has been played
+                          hasPlayedDailyChallenge
+                              ? Theme.of(context)
+                                  .colorScheme
+                                  .background
+                                  .withOpacity(0.2)
+                              : Theme.of(context).colorScheme.background,
                       foregroundColor:
                           hasPlayedDailyChallenge ? Colors.grey.shade500 : null,
                     ),
