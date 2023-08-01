@@ -69,8 +69,10 @@ class _StartPageState extends State<StartPage> {
     final todayDate = DateTime(today.year, today.month, today.day);
 
     setState(() {
-      hasPlayedDailyChallenge =
-          lastPlayed != null && DateTime.parse(lastPlayed) == todayDate;
+      hasPlayedDailyChallenge = lastPlayed != null &&
+          DateTime.parse(lastPlayed).toUtc().day == todayDate.toUtc().day &&
+          DateTime.parse(lastPlayed).toUtc().month == todayDate.toUtc().month &&
+          DateTime.parse(lastPlayed).toUtc().year == todayDate.toUtc().year;
     });
 
     if (!hasPlayedDailyChallenge) {
@@ -94,25 +96,15 @@ class _StartPageState extends State<StartPage> {
   }
 
   void setNextDailyChallengeTimer() {
-    final tomorrow = DateTime.now().add(Duration(days: 1));
-    final nextDailyChallengeTime =
-        DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 0, 0, 0);
-    final timeUntilNextDailyChallenge =
-        nextDailyChallengeTime.difference(DateTime.now());
+    final now = DateTime.now();
+    final nextDay =
+        DateTime(now.year, now.month, now.day).add(const Duration(days: 1));
 
-    if (timeUntilNextDailyChallenge.isNegative) {
-      // If by any chance the current time is already after the next daily challenge time, try again for the next day.
-      setNextDailyChallengeTimer();
-    } else {
-      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        setState(() {
-          if (DateTime.now().isAfter(nextDailyChallengeTime)) {
-            // Reset the state to reflect the new daily challenge.
-            checkIfDailyChallengePlayed();
-          }
-        });
-      });
-    }
+    final difference = nextDay.difference(now);
+
+    timer = Timer(difference, () {
+      checkIfDailyChallengePlayed();
+    });
   }
 
   @override
@@ -122,6 +114,7 @@ class _StartPageState extends State<StartPage> {
   }
 
   Future<void> _playGame(BuildContext context, bool useRandomDate) async {
+    checkIfDailyChallengePlayed();
     if (hasPlayedDailyChallenge && !useRandomDate) {
       // The game has already been played today.
       // Show a dialog or another kind of message
@@ -155,9 +148,7 @@ class _StartPageState extends State<StartPage> {
 
       // When the game view is closed, update the state and check if the daily challenge was played.
       setState(() {
-        if (!useRandomDate) {
-          hasPlayedDailyChallenge = true;
-        }
+        hasPlayedDailyChallenge = true;
       });
       checkIfDailyChallengePlayed();
     } else {

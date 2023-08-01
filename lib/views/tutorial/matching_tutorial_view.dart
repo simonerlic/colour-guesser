@@ -28,7 +28,7 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
       body: Center(
         child: Padding(
           // only horizontal padding
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
@@ -58,7 +58,7 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      "Since it's a tutorial, I'll show you your colour as you move the sliders. Then, make the guess when you're ready.",
+                      "Since it's a tutorial, I'll show you your colour as you move the sliders. Then, press \"Make Guess\" when you feel that it's correct.",
                     ),
                   ],
                 ),
@@ -98,8 +98,8 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                   child: const Text("Make Guess"),
                 ),
               ),
+              const Spacer(),
             ],
-            // Fill up bottom space
           ),
         ),
       ),

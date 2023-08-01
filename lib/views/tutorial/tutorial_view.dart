@@ -31,15 +31,18 @@ class TutorialPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                child: const Text('Let\'s go!'),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SliderTutorialView()),
-                  );
-                },
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.86,
+                child: ElevatedButton(
+                  child: const Text('Let\'s go!'),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SliderTutorialView()),
+                    );
+                  },
+                ),
               ),
             ],
           ),

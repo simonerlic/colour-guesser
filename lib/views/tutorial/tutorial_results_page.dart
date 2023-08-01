@@ -51,6 +51,7 @@ class TutorialResultsPage extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SplitColoredBoxWidget(
               goalColor: goalColor,
@@ -87,25 +88,19 @@ class TutorialResultsPage extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.86,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FinishTutorialPage(),
-                              ),
-                            );
-                          },
-                          child: const Text("Cool!"),
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FinishTutorialPage(),
+                          ),
+                        );
+                      },
+                      child: const Text("Ok!"),
+                    ),
                   ),
                 ],
               ),

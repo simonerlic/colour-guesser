@@ -38,8 +38,7 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text:
-                            "There's a lot of theory behind how colours are created, but for now, all you need to know is that each colour is made up of a combination of",
+                        text: "Every colour is made up of a combination of",
                         style: Theme.of(context).textTheme.bodyMedium,
                         children: const <TextSpan>[
                           TextSpan(
@@ -77,7 +76,7 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Try moving the sliders below to see how the values affect the colours! When you\'re ready, press the "Next" button to continue.',
+                      'Try moving the sliders below to see how the values affect the colours. When you feel that you have a handle on things, press the "Next" button to continue.',
                     )
                   ],
                 ),
@@ -96,19 +95,21 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                   });
                 },
               ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                child: const Text('Next'),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MatchingTutorialView()),
-                  );
-                },
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.90,
+                child: ElevatedButton(
+                  child: const Text('Next'),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MatchingTutorialView()),
+                    );
+                  },
+                ),
               ),
+              const Spacer(),
             ],
-            // Fill up bottom space
           ),
         ),
       ),

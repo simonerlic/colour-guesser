@@ -29,7 +29,7 @@ class FinishTutorialPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text(
-                'This tutorial will always be available via\nthe "?" icon on the top right corner of the home screen.',
+                'This tutorial will always be available viathe "?" icon on the top right corner of the home screen.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
@@ -38,22 +38,18 @@ class FinishTutorialPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              Row(
-                children: [
-                  const Spacer(),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.82,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute<StartPage>(
-                                builder: (_) => const StartPage()));
-                      },
-                      child: const Text("Thanks!"),
-                    ),
-                  ),
-                  const Spacer(),
-                ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // go back to home screen
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MyApp()),
+                    );
+                  },
+                  child: const Text("Thanks!"),
+                ),
               ),
             ],
           ),
