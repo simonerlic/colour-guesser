@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:colour/main.dart';
+import 'package:flutter/services.dart';
 
 class FinishTutorialPage extends StatelessWidget {
   const FinishTutorialPage({Key? key}) : super(key: key);
@@ -44,11 +44,8 @@ class FinishTutorialPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
                   onPressed: () {
-                    // go back to home screen
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const MyApp()),
-                    );
+                    HapticFeedback.lightImpact();
+                    Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: const Text("Thanks!"),
                 ),
