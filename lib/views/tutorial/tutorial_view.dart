@@ -9,6 +9,7 @@ class TutorialPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tutorial'),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Padding(
@@ -16,6 +17,7 @@ class TutorialPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              const Spacer(),
               const Text(
                 'Welcome!',
                 style: TextStyle(fontSize: 24),
@@ -31,12 +33,13 @@ class TutorialPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
+              const Spacer(),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.86,
                 child: ElevatedButton(
                   child: const Text('Let\'s go!'),
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const SliderTutorialView()),

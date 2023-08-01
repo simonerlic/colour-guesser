@@ -1,5 +1,7 @@
+import 'package:flutter/services.dart';
+
 import 'package:flutter/material.dart';
-import 'package:colour/views/split_colored_box_widget.dart';
+import 'package:colour/views/widgets/split_colored_box.dart';
 
 class PastResultsPage extends StatelessWidget {
   final Color goalColor;
@@ -127,6 +129,7 @@ class PastResultsPage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.86,
                         child: ElevatedButton(
                           onPressed: () {
+                            HapticFeedback.lightImpact();
                             Navigator.of(context).pop();
                           },
                           child: const Text("Done"),

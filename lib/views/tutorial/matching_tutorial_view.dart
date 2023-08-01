@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:colour/views/color_selector_widget.dart';
-import 'package:colour/views/split_colored_box_widget.dart';
+import 'package:colour/views/widgets/color_selector.dart';
+import 'package:colour/views/widgets/split_colored_box.dart';
 
 import 'package:colour/views/tutorial/tutorial_results_page.dart';
 
@@ -81,6 +81,7 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                 },
               ),
               const SizedBox(height: 16),
+              const Spacer(),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: ElevatedButton(
@@ -98,7 +99,7 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                   child: const Text("Make Guess"),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 16),
             ],
           ),
         ),

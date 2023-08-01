@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:colour/models/hash_date_to_color.dart';
-import 'package:colour/views/colored_box_widget.dart';
-import 'package:colour/views/color_selector_widget.dart';
-import 'package:colour/views/results_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:colour/views/widgets/colored_box.dart';
+import 'package:colour/views/widgets/color_selector.dart';
+import 'package:colour/views/results_page.dart';
+import 'package:colour/models/hash_date_to_color.dart';
 import 'package:colour/models/game_result.dart';
 
 class GameView extends StatefulWidget {
@@ -82,6 +84,8 @@ class _GameViewState extends State<GameView> {
                   if (!widget.useRandomDate) {
                     saveResult();
                   }
+
+                  HapticFeedback.lightImpact();
 
                   Navigator.pushReplacement(
                     context,

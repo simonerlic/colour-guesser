@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:colour/views/split_colored_box_widget.dart';
+import 'package:colour/views/widgets/split_colored_box.dart';
 import 'package:colour/views/tutorial/finish_tutorial_view.dart';
 
 class TutorialResultsPage extends StatelessWidget {
@@ -38,18 +38,11 @@ class TutorialResultsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor:
-              Colors.white, //Theme.of(context).colorScheme.inversePrimary,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(15),
-            ),
-          ),
-          title: const Text("Results"),
-          titleTextStyle: Theme.of(context).textTheme.headlineSmall),
+        title: const Text("Results"),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -89,21 +82,21 @@ class TutorialResultsPage extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FinishTutorialPage(),
-                            ),
-                          );
-                        },
-                        child: const Text("Ok!"),
-                      ),
-                    ),
                   ],
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FinishTutorialPage(),
+                      ),
+                    );
+                  },
+                  child: const Text("Ok!"),
                 ),
               ),
             ],

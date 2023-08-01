@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:colour/views/tutorial/matching_tutorial_view.dart';
-import 'package:colour/views/color_selector_widget.dart';
-import 'package:colour/views/colored_box_widget.dart';
+import 'package:colour/views/widgets/color_selector.dart';
+import 'package:colour/views/widgets/colored_box.dart';
 
 class SliderTutorialView extends StatefulWidget {
   const SliderTutorialView({Key? key}) : super(key: key);
@@ -76,7 +76,7 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Try moving the sliders below to see how the values affect the colours! When you feel that you have a handle on things, press the "Next" button to continue.',
+                      'Try moving the sliders below to see how the values affect the colours! When you feel that you have a handle on how it works, press the "Next" button to continue.',
                     )
                   ],
                 ),
@@ -95,12 +95,13 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                   });
                 },
               ),
+              const Spacer(),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: ElevatedButton(
                   child: const Text('Next'),
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const MatchingTutorialView()),
@@ -108,7 +109,7 @@ class _SliderTutorialViewState extends State<SliderTutorialView> {
                   },
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 16),
             ],
           ),
         ),

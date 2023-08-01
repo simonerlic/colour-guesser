@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:colour/views/split_colored_box_widget.dart';
+import 'package:flutter/services.dart';
+
+import 'package:colour/views/widgets/split_colored_box.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ResultsPage extends StatelessWidget {
@@ -86,6 +88,7 @@ class ResultsPage extends StatelessWidget {
                             width: MediaQuery.of(context).size.width * 0.18,
                             child: ElevatedButton(
                                 onPressed: () {
+                                  HapticFeedback.lightImpact();
                                   Share.share("""
 Δ🟥: ${(goalColor.red - userColor.red).abs()}
 Δ🟩: ${(goalColor.green - userColor.green).abs()}
@@ -131,6 +134,7 @@ Can you beat my score? https://chromanigma.serlic.dev""",
                         width: MediaQuery.of(context).size.width * 0.86,
                         child: ElevatedButton(
                           onPressed: () {
+                            HapticFeedback.lightImpact();
                             Navigator.of(context)
                                 .popUntil((route) => route.isFirst);
                           },

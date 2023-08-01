@@ -1,11 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:colour/models/hash_date_to_color.dart';
+
 import 'package:colour/views/game_view.dart';
 import 'package:colour/views/gallery_page.dart';
-import 'package:colour/models/game_result.dart';
 import 'package:colour/views/tutorial/tutorial_view.dart';
+import 'package:colour/views/widgets/countdown_timer.dart';
+import 'package:colour/models/game_result.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,6 +51,7 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   bool hasPlayedDailyChallenge = false;
   Timer? timer;
+  Duration? timeLeftUntilNextDay;
 
   @override
   void initState() {
@@ -78,6 +83,10 @@ class _StartPageState extends State<StartPage> {
     if (!hasPlayedDailyChallenge) {
       setNextDailyChallengeTimer();
     }
+
+    if (hasPlayedDailyChallenge) {
+      setNextDailyChallengeTimer();
+    }
   }
 
   Future<void> checkIfTutorialPlayed() async {
@@ -96,14 +105,24 @@ class _StartPageState extends State<StartPage> {
   }
 
   void setNextDailyChallengeTimer() {
+    timer?.cancel();
+
     final now = DateTime.now();
     final nextDay =
         DateTime(now.year, now.month, now.day).add(const Duration(days: 1));
 
-    final difference = nextDay.difference(now);
+    timeLeftUntilNextDay = nextDay.difference(now);
 
-    timer = Timer(difference, () {
-      checkIfDailyChallengePlayed();
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      final int timeLeftInSecs = timeLeftUntilNextDay?.inSeconds ?? 0;
+
+      setState(() {
+        if (timeLeftInSecs > 0) {
+          timeLeftUntilNextDay = Duration(seconds: timeLeftInSecs - 1);
+        } else {
+          timer.cancel();
+        }
+      });
     });
   }
 
@@ -178,6 +197,7 @@ class _StartPageState extends State<StartPage> {
                 setState(() {
                   hasPlayedDailyChallenge = false;
                 });
+                checkIfTutorialPlayed();
                 Navigator.of(context).pop();
               },
             ),
@@ -216,6 +236,9 @@ class _StartPageState extends State<StartPage> {
             Text("Chromanigma",
                 // Use Lexend-Medium for the title
                 style: Theme.of(context).textTheme.headlineMedium),
+            const SizedBox(height: 8),
+            if (hasPlayedDailyChallenge)
+              CountdownTimer(initialDuration: timeLeftUntilNextDay!),
             const SizedBox(height: 50),
             Column(
               children: <Widget>[
@@ -223,6 +246,7 @@ class _StartPageState extends State<StartPage> {
                   width: MediaQuery.of(context).size.width * 0.60,
                   child: ElevatedButton(
                     onPressed: () {
+                      HapticFeedback.lightImpact();
                       _playGame(context, false);
                     },
                     style: ElevatedButton.styleFrom(
@@ -240,6 +264,7 @@ class _StartPageState extends State<StartPage> {
                   child: ElevatedButton(
                     child: const Text('Practice Challenge'),
                     onPressed: () {
+                      HapticFeedback.lightImpact();
                       _playGame(context, true);
                     },
                   ),
@@ -249,6 +274,7 @@ class _StartPageState extends State<StartPage> {
                   width: MediaQuery.of(context).size.width * 0.60,
                   child: ElevatedButton(
                     onPressed: () {
+                      HapticFeedback.lightImpact();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -256,6 +282,7 @@ class _StartPageState extends State<StartPage> {
                       );
                     },
                     onLongPress: () {
+                      HapticFeedback.mediumImpact();
                       _resetDate(context);
                       GameResult.clearGameResults();
                     },

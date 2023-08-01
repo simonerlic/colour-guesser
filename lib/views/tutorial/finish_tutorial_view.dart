@@ -11,49 +11,49 @@ class FinishTutorialPage extends StatelessWidget {
         title: const Text('Tutorial'),
       ),
       body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'You\'re all set!',
-                  style: TextStyle(fontSize: 24),
-                  // center text
-                  textAlign: TextAlign.center,
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const Spacer(),
+              const Text(
+                'You\'re all set!',
+                style: TextStyle(fontSize: 24),
+                // center text
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Congrats on finishing the tutorial.\nYou\'re now ready to play the game!',
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'This tutorial will always be available via the "?" icon on the top right corner of the home screen.',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Good luck, and have fun!',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              const Spacer(),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // go back to home screen
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MyApp()),
+                    );
+                  },
+                  child: const Text("Thanks!"),
                 ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Congrats on finishing the tutorial.\nYou\'re now ready to play the game!',
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'This tutorial will always be available via the "?" icon on the top right corner of the home screen.',
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Good luck, and have fun!',
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // go back to home screen
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const MyApp()),
-                      );
-                    },
-                    child: const Text("Thanks!"),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
