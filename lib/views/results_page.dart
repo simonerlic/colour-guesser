@@ -40,13 +40,6 @@ class ResultsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor:
-              Colors.white, //Theme.of(context).colorScheme.inversePrimary,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(15),
-            ),
-          ),
           title: const Text("Results"),
           centerTitle: true,
           titleTextStyle: Theme.of(context).textTheme.headlineSmall,
