@@ -254,12 +254,18 @@ class _StartPageState extends State<StartPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.auto_awesome_mosaic_rounded,
-                    color: Theme.of(context).colorScheme.primary),
+                Icon(Icons.tune_rounded,
+                    size: 28,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer),
                 const SizedBox(width: 8),
                 Text("Prismatic",
                     // Use Lexend-Medium for the title
-                    style: Theme.of(context).textTheme.headlineMedium),
+                    style: TextStyle(
+                        fontFamily: 'Lexend',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 28,
+                        color:
+                            Theme.of(context).colorScheme.onPrimaryContainer)),
               ],
             ),
             const SizedBox(height: 8),

@@ -47,7 +47,12 @@ class _CountdownTimerState extends State<CountdownTimer> {
       'Next daily challenge in: ${_duration.inHours.toString().padLeft(2, '0')}:'
       '${(_duration.inMinutes % 60).toString().padLeft(2, '0')}:'
       '${(_duration.inSeconds % 60).toString().padLeft(2, '0')}',
-      style: Theme.of(context).textTheme.labelSmall,
+      style: TextStyle(
+          fontFamily: 'Lexend',
+          fontWeight: FontWeight.w400,
+          fontSize: 10,
+          letterSpacing: 0.5,
+          color: Theme.of(context).colorScheme.onSecondaryContainer),
     );
   }
 }
