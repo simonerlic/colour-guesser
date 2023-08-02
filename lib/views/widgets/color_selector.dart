@@ -70,7 +70,7 @@ class _ColorPickerState extends State<ColorPicker> {
                   2.0, // Optional: Adjust the track height to your preference
               thumbColor: Theme.of(context).colorScheme.onPrimaryContainer,
               activeTrackColor:
-                  Theme.of(context).colorScheme.onPrimaryContainer,
+                  Theme.of(context).colorScheme.onSecondaryContainer,
             ),
             child: Slider(
               value: value,
