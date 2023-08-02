@@ -95,6 +95,13 @@ Can you beat my score? https://prismatic.serlic.dev""",
                                       subject:
                                           'I got $score points in Prismatic!');
                                 },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.background,
+                                  foregroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                ),
                                 child: const Icon(Icons.share)),
                           ),
                         ],
@@ -136,6 +143,12 @@ Can you beat my score? https://prismatic.serlic.dev""",
                                     const GameView(useRandomDate: true)),
                           );
                         },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
                         child: const Text("New Game"),
                       ),
                     ),
@@ -150,6 +163,12 @@ Can you beat my score? https://prismatic.serlic.dev""",
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
                       child: const Text("Done"),
                     ),
                   ),

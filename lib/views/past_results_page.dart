@@ -132,6 +132,13 @@ class PastResultsPage extends StatelessWidget {
                             HapticFeedback.lightImpact();
                             Navigator.of(context).pop();
                           },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.background,
+                            foregroundColor: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
+                          ),
                           child: const Text("Done"),
                         ),
                       ),

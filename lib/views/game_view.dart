@@ -98,6 +98,11 @@ class _GameViewState extends State<GameView> {
                     ),
                   );
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  foregroundColor:
+                      Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
                 child: const Text("Make Guess"),
               ),
             ),

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:colour/models/hash_date_to_color.dart';
 
 import 'package:colour/views/game_view.dart';
 import 'package:colour/views/gallery_page.dart';
 import 'package:colour/views/tutorial/tutorial_view.dart';
 import 'package:colour/views/widgets/countdown_timer.dart';
 import 'package:colour/models/game_result.dart';
+import 'package:colour/models/hash_date_to_color.dart';
 
 void main() {
   runApp(const MyApp());
@@ -284,8 +284,9 @@ class _StartPageState extends State<StartPage> {
                                   .background
                                   .withOpacity(0.2)
                               : Theme.of(context).colorScheme.background,
-                      foregroundColor:
-                          hasPlayedDailyChallenge ? Colors.grey.shade500 : null,
+                      foregroundColor: hasPlayedDailyChallenge
+                          ? Colors.grey.shade500
+                          : Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                     child: const Text('Daily Challenge'),
                   ),
@@ -294,11 +295,16 @@ class _StartPageState extends State<StartPage> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.60,
                   child: ElevatedButton(
-                    child: const Text('Practice Challenge'),
                     onPressed: () {
                       HapticFeedback.lightImpact();
                       _playGame(context, true);
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.background,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
+                    child: const Text('Practice Challenge'),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -318,6 +324,11 @@ class _StartPageState extends State<StartPage> {
                       _resetDate(context);
                       GameResult.clearGameResults();
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.background,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
                     child: const Text('Past Daily Challenges'),
                   ),
                 ),
