@@ -65,9 +65,12 @@ class _ColorPickerState extends State<ColorPicker> {
         const SizedBox(width: 16),
         Expanded(
           child: SliderTheme(
-            data: const SliderThemeData(
+            data: SliderThemeData(
               trackHeight:
                   2.0, // Optional: Adjust the track height to your preference
+              thumbColor: Theme.of(context).colorScheme.onPrimaryContainer,
+              activeTrackColor:
+                  Theme.of(context).colorScheme.onPrimaryContainer,
             ),
             child: Slider(
               value: value,

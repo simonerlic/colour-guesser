@@ -258,14 +258,15 @@ class _StartPageState extends State<StartPage> {
                     size: 28,
                     color: Theme.of(context).colorScheme.onPrimaryContainer),
                 const SizedBox(width: 8),
-                Text("Prismatic",
-                    // Use Lexend-Medium for the title
-                    style: TextStyle(
-                        fontFamily: 'Lexend',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 28,
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer)),
+                Text(
+                  "Prismatic",
+                  // Use Lexend-Medium for the title
+                  style: TextStyle(
+                      fontFamily: 'Lexend',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 28,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer),
+                ),
               ],
             ),
             const SizedBox(height: 8),
