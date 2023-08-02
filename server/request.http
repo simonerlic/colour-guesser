@@ -1,0 +1,11 @@
+### get all leaderboard scores
+GET http://127.0.0.1:8080/leaderboard
+
+### new leaderboard scores
+POST http://127.0.0.1:8080/leaderboard/new
+Content-type: application/json
+
+{
+    "name": "foo2",
+    "score": 90
+}
