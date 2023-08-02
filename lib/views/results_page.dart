@@ -86,14 +86,13 @@ class ResultsPage extends StatelessWidget {
                                 onPressed: () {
                                   HapticFeedback.lightImpact();
                                   Share.share("""
+Prismatic
 Δ🟥: ${(goalColor.red - userColor.red).abs()}
 Δ🟩: ${(goalColor.green - userColor.green).abs()}
 Δ🟦: ${(goalColor.blue - userColor.blue).abs()}
 
 Score: $score
-Can you beat my score? https://prismatic.serlic.dev""",
-                                      subject:
-                                          'I got $score points in Prismatic!');
+Can you beat my score?""", subject: 'I got $score points in Prismatic!');
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:

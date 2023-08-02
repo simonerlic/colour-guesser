@@ -115,28 +115,21 @@ class PastResultsPage extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.86,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            HapticFeedback.lightImpact();
-                            Navigator.of(context).pop();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.background,
-                            foregroundColor: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer,
-                          ),
-                          child: const Text("Done"),
-                        ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.86,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        HapticFeedback.lightImpact();
+                        Navigator.of(context).pop();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.onPrimaryContainer,
                       ),
-                      const Spacer(),
-                    ],
+                      child: const Text("Done"),
+                    ),
                   ),
                 ],
               ),
