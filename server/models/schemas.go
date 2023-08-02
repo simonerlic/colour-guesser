@@ -17,7 +17,7 @@ var (
 
 type LeaderBoard struct {
 	ID    string `json:"id,omitempty"`
-	Time  uint64 `json:"time,omitempty"`
+	Time  string `json:"time,omitempty"`
 	Name  string `json:"name,omitempty"`
 	Score uint8  `json:"score,omitempty"`
 }
@@ -35,8 +35,8 @@ func RefreshCounter() {
 func (l *LeaderBoard) Serialize() error {
 	var id [16]byte
 
-	t := time.Now().UTC().Unix()
-	binary.LittleEndian.PutUint32(id[:4], uint32(t))
+	t := time.Now().UTC()
+	binary.LittleEndian.PutUint32(id[:4], uint32(t.Unix()))
 	binary.LittleEndian.PutUint16(id[4:6], uint16(l.Score))
 
 	idMut.Lock()
@@ -47,7 +47,8 @@ func (l *LeaderBoard) Serialize() error {
 	if _, err := io.ReadFull(rand.Reader, id[8:]); err != nil {
 		return err
 	}
-	l.Time = uint64(t)
+
+	l.Time = time.Now().UTC().Format("Jan 01 2006 03:04:05 PM -07:00")
 	l.ID = hex.EncodeToString(id[:])
 
 	return nil

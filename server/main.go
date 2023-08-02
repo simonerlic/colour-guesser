@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"runtime"
 
 	_ "cg/models"
 )
@@ -17,6 +18,7 @@ func init() {
 	if port == "" {
 		port = "8080"
 	}
+
 }
 
 func main() {

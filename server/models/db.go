@@ -24,7 +24,7 @@ var (
 var schemas = `
 CREATE TABLE IF NOT EXISTS leaderboard (
 	id varchar(32) PRIMARY KEY UNIQUE NOT NULL,
-	time integer NOT NULL,
+	time text NOT NULL,
 	name varchar(100) NOT NULL,
 	score integer NOT NULL
 );
@@ -121,13 +121,6 @@ func (d *Database) NewLeaderboard(leaderboard []LeaderBoard) error {
 
 	for i, l := range leaderboard {
 		values[i] = "(?, ?, ?, ?)"
-
-		// gen new id
-		err = l.Serialize()
-		if err != nil {
-			return err
-		}
-
 		// bind data
 		data = append(data, l.ID, l.Time, l.Name, l.Score)
 	}
@@ -137,7 +130,11 @@ func (d *Database) NewLeaderboard(leaderboard []LeaderBoard) error {
 	if err != nil {
 		return err
 	}
-	return trx.Commit()
+	err = trx.Commit()
+	if err != nil {
+		return trx.Rollback()
+	}
+	return nil
 }
 
 var db *Database
