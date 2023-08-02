@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
               TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w400),
           headlineMedium:
               TextStyle(fontFamily: 'Lexend', fontWeight: FontWeight.w500),
+          // Colour to be a tinted version of the primary colour
         ),
       ),
       themeMode: ThemeMode.system,
@@ -158,8 +159,8 @@ class _StartPageState extends State<StartPage> {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text("Already Played"),
-          content:
-              const Text("You've already played today. Come back tomorrow!"),
+          content: const Text(
+              "You have already played the daily challenge today.\n\nPlease come back tomorrow to play again."),
           actions: [
             ElevatedButton(
               child: const Text("OK"),
@@ -250,9 +251,17 @@ class _StartPageState extends State<StartPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Prismatic",
-                // Use Lexend-Medium for the title
-                style: Theme.of(context).textTheme.headlineMedium),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.auto_awesome_mosaic_rounded,
+                    color: Theme.of(context).colorScheme.primary),
+                const SizedBox(width: 8),
+                Text("Prismatic",
+                    // Use Lexend-Medium for the title
+                    style: Theme.of(context).textTheme.headlineMedium),
+              ],
+            ),
             const SizedBox(height: 8),
             if (hasPlayedDailyChallenge)
               CountdownTimer(initialDuration: timeLeftUntilNextDay!),

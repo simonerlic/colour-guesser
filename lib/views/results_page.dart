@@ -8,11 +8,13 @@ import 'package:share_plus/share_plus.dart';
 class ResultsPage extends StatelessWidget {
   final Color goalColor;
   final Color userColor;
+  final bool wasRandom;
 
   const ResultsPage({
     Key? key,
     required this.goalColor,
     required this.userColor,
+    required this.wasRandom,
   }) : super(key: key);
 
   int _getScore(Color goalColor, Color userColor) {
@@ -121,21 +123,22 @@ Can you beat my score? https://prismatic.serlic.dev""",
                   const SizedBox(
                     height: 16,
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.86,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const GameView(useRandomDate: true)),
-                        );
-                      },
-                      child: const Text("Play Again"),
+                  if (wasRandom)
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.86,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          HapticFeedback.lightImpact();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GameView(useRandomDate: true)),
+                          );
+                        },
+                        child: const Text("New Game"),
+                      ),
                     ),
-                  ),
                   const SizedBox(
                     height: 8,
                   ),

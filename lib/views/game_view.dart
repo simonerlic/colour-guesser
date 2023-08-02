@@ -93,6 +93,7 @@ class _GameViewState extends State<GameView> {
                       builder: (context) => ResultsPage(
                         goalColor: color,
                         userColor: selectedColor,
+                        wasRandom: widget.useRandomDate,
                       ),
                     ),
                   );
