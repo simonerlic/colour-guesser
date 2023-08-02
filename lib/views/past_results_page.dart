@@ -90,9 +90,9 @@ class PastResultsPage extends StatelessWidget {
                           //   child: ElevatedButton(
                           //       onPressed: () {
                           //         Share.share(
-                          //             "Can you beat my score? https://chromanigma.serlic.dev",
+                          //             "Can you beat my score? https://prismatic.serlic.dev",
                           //             subject:
-                          //                 'I got $score points in Chromanigma!');
+                          //                 'I got $score points in Prismatic!');
                           //       },
                           //       child: const Icon(Icons.share)),
                           // ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:colour/views/widgets/split_colored_box.dart';
+import 'package:colour/views/game_view.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ResultsPage extends StatelessWidget {
@@ -88,9 +89,9 @@ class ResultsPage extends StatelessWidget {
 Δ🟦: ${(goalColor.blue - userColor.blue).abs()}
 
 Score: $score
-Can you beat my score? https://chromanigma.serlic.dev""",
+Can you beat my score? https://prismatic.serlic.dev""",
                                       subject:
-                                          'I got $score points in Chromanigma!');
+                                          'I got $score points in Prismatic!');
                                 },
                                 child: const Icon(Icons.share)),
                           ),
@@ -120,22 +121,34 @@ Can you beat my score? https://chromanigma.serlic.dev""",
                   const SizedBox(
                     height: 16,
                   ),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.86,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            HapticFeedback.lightImpact();
-                            Navigator.of(context)
-                                .popUntil((route) => route.isFirst);
-                          },
-                          child: const Text("Done"),
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.86,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        HapticFeedback.lightImpact();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const GameView(useRandomDate: true)),
+                        );
+                      },
+                      child: const Text("Play Again"),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.86,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        HapticFeedback.lightImpact();
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                      },
+                      child: const Text("Done"),
+                    ),
                   ),
                 ],
               ),

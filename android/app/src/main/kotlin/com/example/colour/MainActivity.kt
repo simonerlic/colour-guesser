@@ -1,4 +1,4 @@
-package com.example.colour
+package dev.serlic.colour
 
 import io.flutter.embedding.android.FlutterActivity
 

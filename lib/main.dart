@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chromanigma',
+      title: 'Prismatic',
       theme: ThemeData(
         fontFamily: 'Lexend',
         colorScheme: ColorScheme.fromSeed(
@@ -250,7 +250,7 @@ class _StartPageState extends State<StartPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Chromanigma",
+            Text("Prismatic",
                 // Use Lexend-Medium for the title
                 style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 8),
