@@ -6,6 +6,6 @@ POST http://127.0.0.1:8080/leaderboard/new
 Content-type: application/json
 
 {
-    "name": "foo1",
-    "score": 45
+    "name": "foo2",
+    "score": 90
 }
