@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:colour/views/tutorial/slider_tutorial_view.dart';
 
-class TutorialPage extends StatelessWidget {
-  const TutorialPage({Key? key}) : super(key: key);
+class TutorialView extends StatelessWidget {
+  const TutorialView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:colour/models/game_result.dart';
 import 'package:colour/views/widgets/split_colored_box.dart';
-import 'package:colour/views/past_results_page.dart';
+import 'package:colour/views/game/past_results_page.dart';
 import 'package:intl/intl.dart';
 
 class GalleryPage extends StatefulWidget {

@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:colour/views/widgets/colored_box.dart';
 import 'package:colour/views/widgets/color_selector.dart';
-import 'package:colour/views/results_page.dart';
+import 'package:colour/views/game/results_page.dart';
 import 'package:colour/models/hash_date_to_color.dart';
 import 'package:colour/models/game_result.dart';
 

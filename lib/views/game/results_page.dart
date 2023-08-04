@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:colour/views/widgets/split_colored_box.dart';
-import 'package:colour/views/game_view.dart';
+import 'package:colour/views/game/game_view.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ResultsPage extends StatelessWidget {
