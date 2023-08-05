@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:colour/views/start_page.dart';
 import 'package:colour/models/hash_date_to_color.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -8,8 +8,7 @@ import 'package:colour/views/game/game_view.dart';
 import 'package:colour/views/game/gallery_page.dart';
 import 'package:colour/views/tutorial/tutorial_view.dart';
 import 'package:colour/views/widgets/countdown_timer.dart';
-
-import 'package:colour/models/game_result.dart';
+import 'package:colour/views/widgets/gamemode_card.dart';
 
 // A page displaying a button to the game view and a button to the gallery page
 
@@ -176,14 +175,6 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
     }
   }
 
-  Future<void> _goToGallery() async {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const GalleryPage(),
-      ),
-    );
-  }
-
   @override
   void dispose() {
     timer?.cancel();
@@ -193,78 +184,76 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Daily Challenge")),
+      appBar: AppBar(
+        // Add an info button to the app bar
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.question_mark_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TutorialView()),
+              );
+            },
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(
+                  Theme.of(context).colorScheme.onPrimaryContainer),
+            ),
+          ),
+        ],
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Icon(Icons.tune_rounded,
-                    size: 28,
-                    color: Theme.of(context).colorScheme.onPrimaryContainer),
-                const SizedBox(width: 8),
-                Text(
-                  "Prismatic",
-                  // Use Lexend-Medium for the title
-                  style: TextStyle(
-                      fontFamily: 'Lexend',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 28,
-                      color: Theme.of(context).colorScheme.onPrimaryContainer),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.tune_rounded,
+                        size: 28,
+                        color:
+                            Theme.of(context).colorScheme.onPrimaryContainer),
+                    const SizedBox(width: 8),
+                    Text(
+                      "Prismatic",
+                      // Use Lexend-Medium for the title
+                      style: TextStyle(
+                          fontFamily: 'Lexend',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 28,
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer),
+                    ),
+                  ],
                 ),
               ],
             ),
-            const SizedBox(height: 8),
             if (hasPlayedDailyChallenge)
               CountdownTimer(initialDuration: timeLeftUntilNextDay!),
             const SizedBox(height: 50),
-            Column(
-              children: <Widget>[
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.60,
-                  child: ElevatedButton(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: <Widget>[
+                  GamemodeCard(
+                    title: 'Play the Daily Challenge',
+                    description:
+                        'Play the daily challenge and share to see how you stack up with your friends!',
                     onPressed: () {
                       HapticFeedback.lightImpact();
                       _playGame(context, false);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          // theme colour, but with 20% opacity if the daily challenge has been played
-                          hasPlayedDailyChallenge
-                              ? Theme.of(context)
-                                  .colorScheme
-                                  .background
-                                  .withOpacity(0.2)
-                              : Theme.of(context).colorScheme.background,
-                      foregroundColor: hasPlayedDailyChallenge
-                          ? Colors.grey.shade500
-                          : Theme.of(context).colorScheme.onPrimaryContainer,
-                    ),
-                    child: const Text('Daily Challenge'),
+                    disabled: hasPlayedDailyChallenge,
+                    iconData: Icons.play_arrow_rounded,
                   ),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.60,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      HapticFeedback.lightImpact();
-                      _playGame(context, true);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.background,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onPrimaryContainer,
-                    ),
-                    child: const Text('Practice Challenge'),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.60,
-                  child: ElevatedButton(
+                  const SizedBox(height: 8),
+                  GamemodeCard(
+                    title: 'View the Gallery',
+                    description:
+                        'See your past daily challenges and their results!',
                     onPressed: () {
                       HapticFeedback.lightImpact();
                       Navigator.push(
@@ -273,21 +262,12 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
                             builder: (context) => const GalleryPage()),
                       );
                     },
-                    onLongPress: () {
-                      HapticFeedback.mediumImpact();
-                      _resetDate(context);
-                      GameResult.clearGameResults();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.background,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onPrimaryContainer,
-                    ),
-                    child: const Text('Past Daily Challenges'),
+                    disabled: false,
+                    iconData: Icons.photo_library_rounded,
                   ),
-                ),
-              ],
-            )
+                ],
+              ),
+            ),
           ],
         ),
       ),
