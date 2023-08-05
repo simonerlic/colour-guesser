@@ -19,7 +19,8 @@ class DailyChallengePage extends StatefulWidget {
   _DailyChallengePageState createState() => _DailyChallengePageState();
 }
 
-class _DailyChallengePageState extends State<DailyChallengePage> {
+class _DailyChallengePageState extends State<DailyChallengePage>
+    with WidgetsBindingObserver {
   bool hasPlayedDailyChallenge = false;
   Timer? timer;
   Duration? timeLeftUntilNextDay;
@@ -27,6 +28,7 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     checkIfDailyChallengePlayed();
     checkIfTutorialPlayed();
   }
@@ -35,6 +37,13 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
   void didUpdateWidget(DailyChallengePage oldWidget) {
     super.didUpdateWidget(oldWidget);
     checkIfDailyChallengePlayed();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      checkIfDailyChallengePlayed();
+    }
   }
 
   Future<void> checkIfTutorialPlayed() async {
@@ -178,6 +187,7 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
   @override
   void dispose() {
     timer?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
