@@ -30,7 +30,7 @@ class FinishTutorialPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text(
-                'This tutorial will always be available via the "?" icon on the top right corner of the home screen.',
+                'This tutorial will always be available on the "Practice" tab if you need to come back to it.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),

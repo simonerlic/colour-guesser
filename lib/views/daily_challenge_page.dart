@@ -186,21 +186,7 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
     return Scaffold(
       appBar: AppBar(
         // Add an info button to the app bar
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.question_mark_outlined),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TutorialView()),
-              );
-            },
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(
-                  Theme.of(context).colorScheme.onPrimaryContainer),
-            ),
-          ),
-        ],
+
         automaticallyImplyLeading: false,
       ),
       body: Center(
@@ -212,10 +198,15 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.tune_rounded,
-                        size: 28,
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
+                    InkWell(
+                      onLongPress: () {
+                        _resetDate(context);
+                      },
+                      child: Icon(Icons.tune_rounded,
+                          size: 28,
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer),
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       "Prismatic",
@@ -263,7 +254,7 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
                       );
                     },
                     disabled: false,
-                    iconData: Icons.photo_library_rounded,
+                    iconData: Icons.photo_library_outlined,
                   ),
                 ],
               ),
