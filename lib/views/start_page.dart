@@ -47,13 +47,13 @@ class _StartPageState extends State<StartPage> {
       bottomNavigationBar: Container(
         color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 20),
           child: GNav(
             tabBackgroundColor:
                 Theme.of(context).colorScheme.secondaryContainer,
             gap: 8,
             onTabChange: _navigateBottomBar,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(12),
             tabs: [
               GButton(
                 iconColor: Theme.of(context).colorScheme.onPrimaryContainer,

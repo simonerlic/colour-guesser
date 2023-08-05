@@ -30,25 +30,9 @@ class _TimedGameViewState extends State<TimedGameView> {
     super.initState();
     currentDate = widget.useRandomDate ? generateRandomDate() : DateTime.now();
     timer = Timer(const Duration(seconds: 20), makeGuess);
-
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-      (Timer t) {
-        if (timeRemaining < 1) {
-          t.cancel(); // If time runs out, cancel the timer
-          makeGuess(); // and automatically make a guess
-        } else {
-          if (mounted) {
-            // Check if the widget is still in the widget tree
-            setState(() {
-              timeRemaining--; // Else, decrement the remaining time
-            });
-          }
-        }
-      },
-    );
-
     hasMadeGuess = false;
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _showCountdown(context));
   }
 
   void makeGuess() {
@@ -84,6 +68,54 @@ class _TimedGameViewState extends State<TimedGameView> {
     return minDate.add(randomDuration);
   }
 
+  void _showCountdown(BuildContext context) async {
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry? overlayEntry;
+
+    for (int countdown = 3; countdown > 0; countdown--) {
+      overlayEntry = OverlayEntry(
+        builder: (context) => Material(
+          color: Theme.of(context).colorScheme.background.withOpacity(0.8),
+          child: Center(
+            child: Text(
+              '$countdown',
+              style: const TextStyle(
+                  fontSize: 120,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      );
+      overlayState.insert(overlayEntry);
+      await Future.delayed(Duration(seconds: 1));
+      overlayEntry.remove();
+    }
+
+    _startGameTimer();
+  }
+
+  void _startGameTimer() {
+    timer = Timer(const Duration(seconds: 20), makeGuess);
+
+    timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (Timer t) {
+        if (timeRemaining < 1) {
+          t.cancel(); // If time runs out, cancel the timer
+          makeGuess(); // and automatically make a guess
+        } else {
+          if (mounted) {
+            // Check if the widget is still in the widget tree
+            setState(() {
+              timeRemaining--; // Else, decrement the remaining time
+            });
+          }
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Color color = hashDateToColor(currentDate);
@@ -106,6 +138,13 @@ class _TimedGameViewState extends State<TimedGameView> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Text(
+              '$timeRemaining',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
             SplitColoredBoxWidget(
               userColor: selectedColor,
               goalColor: color,
@@ -116,10 +155,6 @@ class _TimedGameViewState extends State<TimedGameView> {
                   selectedColor = color;
                 });
               },
-            ),
-            Text(
-              'Time Remaining: $timeRemaining',
-              style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(
               height: 30,
