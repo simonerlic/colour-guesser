@@ -14,10 +14,25 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   int _selectedIndex = 0;
+  final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   void _navigateBottomBar(int index) {
     setState(() {
       _selectedIndex = index;
+      _pageController.animateToPage(index,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.fastLinearToSlowEaseIn);
     });
   }
 
@@ -40,7 +55,6 @@ class _StartPageState extends State<StartPage> {
             onTabChange: _navigateBottomBar,
             padding: const EdgeInsets.all(8),
             tabs: [
-              // home, practice, settings
               GButton(
                 iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
                 iconActiveColor:
@@ -50,27 +64,27 @@ class _StartPageState extends State<StartPage> {
                 text: 'Home',
               ),
               GButton(
-                icon: Icons.play_arrow,
+                icon: Icons.lightbulb_circle,
                 text: 'Practice',
                 iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
                 iconActiveColor:
                     Theme.of(context).colorScheme.onPrimaryContainer,
                 textColor: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
-              // GButton(
-              //   icon: Icons.settings,
-              //   text: 'Settings',
-              //   iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
-              //   iconActiveColor:
-              //       Theme.of(context).colorScheme.onPrimaryContainer,
-              //   textColor: Theme.of(context).colorScheme.onPrimaryContainer,
-              // ),
             ],
-            selectedIndex: 0,
+            selectedIndex: _selectedIndex,
           ),
         ),
       ),
-      body: _pages[_selectedIndex],
+      body: PageView(
+        controller: _pageController,
+        children: _pages,
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
     );
   }
 }
