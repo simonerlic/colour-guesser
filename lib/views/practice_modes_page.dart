@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colour/views/tutorial/tutorial_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,28 +34,57 @@ class _PracticePageState extends State<PracticePage> {
     );
   }
 
+  Future<void> _playTutorial(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const TutorialView()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Practice",
-          // Use Lexend-Medium for the title
-          style: TextStyle(
-            fontFamily: 'Lexend',
-            fontWeight: FontWeight.w500,
-            fontSize: 24.0,
+          // title: const Text(
+          //   "Practice",
+          //   // Use Lexend-Medium for the title
+          //   style: TextStyle(
+          //     fontFamily: 'Lexend',
+          //     fontWeight: FontWeight.w500,
+          //     fontSize: 24.0,
+          //   ),
+          // ),
+          // centerTitle: true,
           ),
-        ),
-        centerTitle: true,
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [],
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      child: Icon(Icons.lightbulb_circle_outlined,
+                          size: 28,
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      "Practice",
+                      // Use Lexend-Medium for the title
+                      style: TextStyle(
+                          fontFamily: 'Lexend',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 28,
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer),
+                    ),
+                  ],
+                ),
+              ],
             ),
             const SizedBox(height: 50),
             Padding(
@@ -89,7 +119,26 @@ class _PracticePageState extends State<PracticePage> {
                       _playTimedGame(context);
                     },
                     disabled: false,
-                    iconData: Icons.timer_rounded,
+                    iconData: Icons.timer_outlined,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: <Widget>[
+                  GamemodeCard(
+                    title: 'Play the Tutorial',
+                    description:
+                        'Don\'t know how to play? Learn how to play the game here!',
+                    onPressed: () {
+                      HapticFeedback.lightImpact();
+                      _playTutorial(context);
+                    },
+                    disabled: false,
+                    iconData: Icons.school_outlined,
                   ),
                 ],
               ),
