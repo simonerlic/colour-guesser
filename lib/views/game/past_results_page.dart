@@ -45,96 +45,87 @@ class PastResultsPage extends StatelessWidget {
         centerTitle: true,
         titleTextStyle: Theme.of(context).textTheme.headlineSmall,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SplitColoredBoxWidget(
-              goalColor: goalColor,
-              userColor: userColor,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Score",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall),
-                              Text("You got $score points!"),
-                            ],
-                          ),
-                          // const Spacer(),
-                          // SizedBox(
-                          //   width: MediaQuery.of(context).size.width * 0.18,
-                          //   child: ElevatedButton(
-                          //       onPressed: () {
-                          //         Share.share(
-                          //             "Can you beat my score? https://prismatic.serlic.dev",
-                          //             subject:
-                          //                 'I got $score points in Prismatic!');
-                          //       },
-                          //       child: const Icon(Icons.share)),
-                          // ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          "Your Color: rgb(${userColor.red}, ${userColor.green}, ${userColor.blue})"),
-                      Text(
-                          "Goal Color: rgb(${goalColor.red}, ${goalColor.green}, ${goalColor.blue})"),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Text("𝚫🟥: ${(goalColor.red - userColor.red).abs()}"),
-                      Text(
-                          "𝚫🟩: ${(goalColor.green - userColor.green).abs()}"),
-                      Text("𝚫🟦: ${(goalColor.blue - userColor.blue).abs()}"),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.86,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).colorScheme.background,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                      child: const Text("Done"),
-                    ),
-                  ),
-                ],
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SplitColoredBoxWidget(
+                goalColor: goalColor,
+                userColor: userColor,
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Score",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall),
+                                Text("You got $score points!"),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                            "Your Color: rgb(${userColor.red}, ${userColor.green}, ${userColor.blue})"),
+                        Text(
+                            "Goal Color: rgb(${goalColor.red}, ${goalColor.green}, ${goalColor.blue})"),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Text("𝚫🟥: ${(goalColor.red - userColor.red).abs()}"),
+                        Text(
+                            "𝚫🟩: ${(goalColor.green - userColor.green).abs()}"),
+                        Text(
+                            "𝚫🟦: ${(goalColor.blue - userColor.blue).abs()}"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.90,
+                child: ElevatedButton(
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                  child: const Text("Done"),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+            ],
+          ),
         ),
       ),
     );

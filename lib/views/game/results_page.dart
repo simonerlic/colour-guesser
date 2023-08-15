@@ -137,7 +137,7 @@ Score: $score
               const Spacer(),
               if (wasRandom)
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width * 0.90,
                   child: ElevatedButton(
                     onPressed: () {
                       HapticFeedback.lightImpact();
@@ -160,7 +160,7 @@ Score: $score
                 height: 8,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width * 0.90,
                 child: ElevatedButton(
                   onPressed: () {
                     HapticFeedback.lightImpact();
@@ -174,6 +174,7 @@ Score: $score
                   child: const Text("Done"),
                 ),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

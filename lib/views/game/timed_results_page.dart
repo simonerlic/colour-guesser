@@ -127,7 +127,7 @@ Time taken: ${15 - remainingTime} seconds
             const Spacer(),
             if (wasRandom)
               SizedBox(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width * 0.90,
                 child: ElevatedButton(
                   onPressed: () {
                     HapticFeedback.lightImpact();
@@ -150,7 +150,7 @@ Time taken: ${15 - remainingTime} seconds
               height: 8,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width * 0.90,
               child: ElevatedButton(
                 onPressed: () {
                   HapticFeedback.lightImpact();
@@ -164,6 +164,7 @@ Time taken: ${15 - remainingTime} seconds
                 child: const Text("Done"),
               ),
             ),
+            const SizedBox(height: 16),
           ],
         ),
       ),

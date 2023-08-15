@@ -41,7 +41,7 @@ class FinishTutorialPage extends StatelessWidget {
               const SizedBox(height: 16),
               const Spacer(),
               SizedBox(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width * 0.90,
                 child: ElevatedButton(
                   onPressed: () {
                     HapticFeedback.lightImpact();

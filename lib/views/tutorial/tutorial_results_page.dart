@@ -85,7 +85,7 @@ class TutorialResultsPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width * 0.90,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -98,6 +98,7 @@ class TutorialResultsPage extends StatelessWidget {
                     child: const Text("Ok!"),
                   ),
                 ),
+                const SizedBox(height: 16),
               ],
             ),
           ),

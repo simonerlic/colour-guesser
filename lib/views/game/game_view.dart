@@ -102,6 +102,7 @@ class _GameViewState extends State<GameView> {
                   child: const Text("Make Guess"),
                 ),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

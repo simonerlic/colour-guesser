@@ -35,7 +35,7 @@ class TutorialView extends StatelessWidget {
               const SizedBox(height: 16),
               const Spacer(),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.86,
+                width: MediaQuery.of(context).size.width * 0.90,
                 child: ElevatedButton(
                   child: const Text('Let\'s go!'),
                   onPressed: () {

@@ -169,6 +169,7 @@ class _TimedGameViewState extends State<TimedGameView> {
                   child: const Text("Make Guess"),
                 ),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),
