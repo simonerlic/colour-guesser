@@ -58,7 +58,7 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      "Since it's a tutorial, I'll show you your colour as you move the sliders. Then, press \"Make Guess\" when you feel that it's correct.",
+                      "Try it out below. When you feel like its close, press \"Make Guess\" to see how close you were.",
                     ),
                   ],
                 ),

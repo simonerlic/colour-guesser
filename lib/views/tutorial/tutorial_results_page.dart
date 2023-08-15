@@ -40,66 +40,66 @@ class TutorialResultsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Results"),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SplitColoredBoxWidget(
-                goalColor: goalColor,
-                userColor: userColor,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                        "When you finish a round, you'll get your score and the difference between your color and the goal color."),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Text("In this case, you got $score points! Well done!"),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                            "🟥 was off by ${(goalColor.red - userColor.red).abs()},"),
-                        Text(
-                            "🟩 was off by ${(goalColor.green - userColor.green).abs()}, and"),
-                        Text(
-                            "🟦 was off by ${(goalColor.blue - userColor.blue).abs()}"),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                  ],
+          child: SizedBox.expand(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SplitColoredBoxWidget(
+                  goalColor: goalColor,
+                  userColor: userColor,
                 ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FinishTutorialPage(),
+                const SizedBox(
+                  height: 16,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                          "When you finish a round, you'll get your score and how far off your guess was."),
+                      const SizedBox(
+                        height: 16,
                       ),
-                    );
-                  },
-                  child: const Text("Ok!"),
+                      Text("In this case, you got $score points!"),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              "🟥 was off by ${(goalColor.red - userColor.red).abs()},"),
+                          Text(
+                              "🟩 was off by ${(goalColor.green - userColor.green).abs()}, and"),
+                          Text(
+                              "🟦 was off by ${(goalColor.blue - userColor.blue).abs()}"),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                const Spacer(),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FinishTutorialPage(),
+                        ),
+                      );
+                    },
+                    child: const Text("Ok!"),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

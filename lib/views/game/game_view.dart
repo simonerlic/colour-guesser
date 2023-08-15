@@ -55,58 +55,55 @@ class _GameViewState extends State<GameView> {
         centerTitle: true,
         titleTextStyle: Theme.of(context).textTheme.headlineSmall,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ColoredBoxWidget(
-              color: color,
-            ),
-            ColorPicker(
-              onColorChanged: (color) {
-                setState(() {
-                  selectedColor = color;
-                });
-              },
-            ),
-            Text(
-              selectedColor.toString(),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.90,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (!widget.useRandomDate) {
-                    saveResult();
-                  }
-
-                  HapticFeedback.lightImpact();
-
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResultsPage(
-                        goalColor: color,
-                        userColor: selectedColor,
-                        wasRandom: widget.useRandomDate,
-                      ),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.background,
-                  foregroundColor:
-                      Theme.of(context).colorScheme.onPrimaryContainer,
-                ),
-                child: const Text("Make Guess"),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ColoredBoxWidget(
+                color: color,
               ),
-            ),
-          ],
+              ColorPicker(
+                onColorChanged: (color) {
+                  setState(() {
+                    selectedColor = color;
+                  });
+                },
+              ),
+              const Spacer(),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.90,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (!widget.useRandomDate) {
+                      saveResult();
+                    }
+
+                    HapticFeedback.lightImpact();
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResultsPage(
+                          goalColor: color,
+                          userColor: selectedColor,
+                          wasRandom: widget.useRandomDate,
+                        ),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                  child: const Text("Make Guess"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

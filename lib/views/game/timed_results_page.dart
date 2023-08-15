@@ -50,7 +50,7 @@ class TimedResultsPage extends StatelessWidget {
           titleTextStyle: Theme.of(context).textTheme.headlineSmall,
           automaticallyImplyLeading: false),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -74,11 +74,10 @@ class TimedResultsPage extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Score",
+                              Text("You got $score points!",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall),
-                              Text("You got $score points!"),
                             ],
                           ),
                           const Spacer(),
@@ -95,7 +94,7 @@ Prismatic - Timed Practice
 
 Score: $score
 Time taken: ${15 - remainingTime} seconds
-Can you beat my score?""", subject: 'I got $score points in 15 seconds on Prismatic!');
+""", subject: 'Share your Prismatic score!');
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
@@ -116,65 +115,53 @@ Can you beat my score?""", subject: 'I got $score points in 15 seconds on Prisma
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                          "Your Color: rgb(${userColor.red}, ${userColor.green}, ${userColor.blue})"),
-                      Text(
-                          "Goal Color: rgb(${goalColor.red}, ${goalColor.green}, ${goalColor.blue})"),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Text("𝚫🟥: ${(goalColor.red - userColor.red).abs()}"),
-                      Text(
-                          "𝚫🟩: ${(goalColor.green - userColor.green).abs()}"),
-                      Text("𝚫🟦: ${(goalColor.blue - userColor.blue).abs()}"),
+                      const Text("Distances:"),
+                      Text("𝚫🟥: ${(goalColor.red - userColor.red)}"),
+                      Text("𝚫🟩: ${(goalColor.green - userColor.green)}"),
+                      Text("𝚫🟦: ${(goalColor.blue - userColor.blue)}"),
                     ],
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  if (wasRandom)
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.86,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          HapticFeedback.lightImpact();
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const TimedGameView(useRandomDate: true)),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.background,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onPrimaryContainer,
-                        ),
-                        child: const Text("New Game"),
-                      ),
-                    ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.86,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).colorScheme.background,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                      child: const Text("Done"),
-                    ),
-                  ),
                 ],
+              ),
+            ),
+            const Spacer(),
+            if (wasRandom)
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const TimedGameView(useRandomDate: true)),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                  child: const Text("Play Again"),
+                ),
+              ),
+            const SizedBox(
+              height: 8,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                onPressed: () {
+                  HapticFeedback.lightImpact();
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  foregroundColor:
+                      Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
+                child: const Text("Done"),
               ),
             ),
           ],

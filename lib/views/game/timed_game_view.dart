@@ -134,44 +134,43 @@ class _TimedGameViewState extends State<TimedGameView> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              '$timeRemaining',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            SplitColoredBoxWidget(
-              userColor: selectedColor,
-              goalColor: color,
-            ),
-            ColorPicker(
-              onColorChanged: (color) {
-                setState(() {
-                  selectedColor = color;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.90,
-              child: ElevatedButton(
-                onPressed: makeGuess,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.background,
-                  foregroundColor:
-                      Theme.of(context).colorScheme.onPrimaryContainer,
-                ),
-                child: const Text("Make Guess"),
+        child: SizedBox.expand(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '$timeRemaining',
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 8,
+              ),
+              SplitColoredBoxWidget(
+                userColor: selectedColor,
+                goalColor: color,
+              ),
+              ColorPicker(
+                onColorChanged: (color) {
+                  setState(() {
+                    selectedColor = color;
+                  });
+                },
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.90,
+                child: ElevatedButton(
+                  onPressed: makeGuess,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                  child: const Text("Make Guess"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -47,134 +47,135 @@ class ResultsPage extends StatelessWidget {
           centerTitle: true,
           titleTextStyle: Theme.of(context).textTheme.headlineSmall,
           automaticallyImplyLeading: false),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SplitColoredBoxWidget(
-              goalColor: goalColor,
-              userColor: userColor,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Score",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall),
-                              Text("You got $score points!"),
-                            ],
-                          ),
-                          const Spacer(),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.18,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  HapticFeedback.lightImpact();
-                                  Share.share("""
-Prismatic
-Δ🟥: ${(goalColor.red - userColor.red).abs()}
-Δ🟩: ${(goalColor.green - userColor.green).abs()}
-Δ🟦: ${(goalColor.blue - userColor.blue).abs()}
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SplitColoredBoxWidget(
+                goalColor: goalColor,
+                userColor: userColor,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("You got $score points!",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall),
+                              ],
+                            ),
+                            const Spacer(),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.18,
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    HapticFeedback.lightImpact();
+                                    if (wasRandom) {
+                                      Share.share("""
+Prismatic - Practice
+Δ🟥: ${(goalColor.red - userColor.red)}
+Δ🟩: ${(goalColor.green - userColor.green)}
+Δ🟦: ${(goalColor.blue - userColor.blue)}
 
 Score: $score
-Can you beat my score?""", subject: 'I got $score points in Prismatic!');
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Theme.of(context).colorScheme.background,
-                                  foregroundColor: Theme.of(context)
-                                      .colorScheme
-                                      .onPrimaryContainer,
-                                ),
-                                child: const Icon(Icons.share)),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          "Your Color: rgb(${userColor.red}, ${userColor.green}, ${userColor.blue})"),
-                      Text(
-                          "Goal Color: rgb(${goalColor.red}, ${goalColor.green}, ${goalColor.blue})"),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Text("𝚫🟥: ${(goalColor.red - userColor.red).abs()}"),
-                      Text(
-                          "𝚫🟩: ${(goalColor.green - userColor.green).abs()}"),
-                      Text("𝚫🟦: ${(goalColor.blue - userColor.blue).abs()}"),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  if (wasRandom)
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.86,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          HapticFeedback.lightImpact();
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const GameView(useRandomDate: true)),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.background,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onPrimaryContainer,
+""", subject: 'Share your Prismatic score!');
+                                    } else {
+                                      Share.share("""
+Prismatic - Daily
+Δ🟥: ${(goalColor.red - userColor.red)}
+Δ🟩: ${(goalColor.green - userColor.green)}
+Δ🟦: ${(goalColor.blue - userColor.blue)}
+
+Score: $score
+""", subject: 'Share your Prismatic score!');
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .background,
+                                    foregroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimaryContainer,
+                                  ),
+                                  child: const Icon(Icons.share)),
+                            ),
+                          ],
                         ),
-                        child: const Text("New Game"),
-                      ),
+                      ],
                     ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.86,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).colorScheme.background,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                      child: const Text("Done"),
+                    const SizedBox(
+                      height: 16,
                     ),
-                  ),
-                ],
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("𝚫🟥: ${(goalColor.red - userColor.red)}"),
+                        Text("𝚫🟩: ${(goalColor.green - userColor.green)}"),
+                        Text("𝚫🟦: ${(goalColor.blue - userColor.blue)}"),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              const Spacer(),
+              if (wasRandom)
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      HapticFeedback.lightImpact();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const GameView(useRandomDate: true)),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.background,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
+                    child: const Text("Play Again"),
+                  ),
+                ),
+              const SizedBox(
+                height: 8,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                  child: const Text("Done"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
