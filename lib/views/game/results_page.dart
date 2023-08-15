@@ -121,7 +121,7 @@ Score: $score
                       ],
                     ),
                     const SizedBox(
-                      height: 16,
+                      height: 8,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

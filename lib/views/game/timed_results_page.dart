@@ -110,7 +110,7 @@ Time taken: ${15 - remainingTime} seconds
                     ],
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 8,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
