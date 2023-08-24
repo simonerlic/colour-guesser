@@ -88,9 +88,9 @@ class TimedResultsPage extends StatelessWidget {
                                   HapticFeedback.lightImpact();
                                   Share.share("""
 Prismatic - Timed Practice
-Δ🟥: ${(goalColor.red - userColor.red).abs()}
-Δ🟩: ${(goalColor.green - userColor.green).abs()}
-Δ🟦: ${(goalColor.blue - userColor.blue).abs()}
+Δ🟥: ${(goalColor.red - userColor.red)}
+Δ🟩: ${(goalColor.green - userColor.green)}
+Δ🟦: ${(goalColor.blue - userColor.blue)}
 
 Score: $score
 Time taken: ${15 - remainingTime} seconds
