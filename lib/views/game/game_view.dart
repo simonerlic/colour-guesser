@@ -65,6 +65,7 @@ class _GameViewState extends State<GameView> {
               ColoredBoxWidget(
                 color: color,
               ),
+              const SizedBox(height: 8),
               ColorPicker(
                 onColorChanged: (color) {
                   setState(() {

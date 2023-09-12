@@ -56,7 +56,7 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     const Text(
                       "Try it out below. When you feel like its close, press \"Make Guess\" to see how close you were.",
                     ),
@@ -66,13 +66,13 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
               const SizedBox(height: 16),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width * 0.60,
+                height: MediaQuery.of(context).size.width * 0.50,
                 child: SplitColoredBoxWidget(
                   userColor: selectedColor,
                   goalColor: Colors.lime,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
               ColorPicker(
                 onColorChanged: (color) {
                   setState(() {
@@ -80,7 +80,6 @@ class _MatchingTutorialViewState extends State<MatchingTutorialView> {
                   });
                 },
               ),
-              const SizedBox(height: 16),
               const Spacer(),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.90,

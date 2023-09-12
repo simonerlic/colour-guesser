@@ -71,11 +71,10 @@ class PastResultsPage extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Score",
+                                Text("You got $score points!",
                                     style: Theme.of(context)
                                         .textTheme
                                         .headlineSmall),
-                                Text("You got $score points!"),
                               ],
                             ),
                           ],
@@ -88,18 +87,9 @@ class PastResultsPage extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                            "Your Color: rgb(${userColor.red}, ${userColor.green}, ${userColor.blue})"),
-                        Text(
-                            "Goal Color: rgb(${goalColor.red}, ${goalColor.green}, ${goalColor.blue})"),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Text("𝚫🟥: ${(goalColor.red - userColor.red).abs()}"),
-                        Text(
-                            "𝚫🟩: ${(goalColor.green - userColor.green).abs()}"),
-                        Text(
-                            "𝚫🟦: ${(goalColor.blue - userColor.blue).abs()}"),
+                        Text("𝚫🟥: ${(goalColor.red - userColor.red)}"),
+                        Text("𝚫🟩: ${(goalColor.green - userColor.green)}"),
+                        Text("𝚫🟦: ${(goalColor.blue - userColor.blue)}"),
                       ],
                     ),
                   ],

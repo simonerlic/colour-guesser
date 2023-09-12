@@ -151,6 +151,7 @@ class _TimedGameViewState extends State<TimedGameView> {
                   userColor: selectedColor,
                   goalColor: color,
                 ),
+                const SizedBox(height: 8),
                 ColorPicker(
                   onColorChanged: (color) {
                     setState(() {

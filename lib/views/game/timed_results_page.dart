@@ -109,9 +109,6 @@ Time taken: ${15 - remainingTime} seconds
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
