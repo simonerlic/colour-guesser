@@ -40,69 +40,79 @@ class TutorialResultsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Results"),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: SizedBox.expand(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SplitColoredBoxWidget(
-                  goalColor: goalColor,
-                  userColor: userColor,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                          "When you finish a round, you'll get your score and how far off your guess was."),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Text("In this case, you got $score points!"),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                              "🟥 was off by ${(goalColor.red - userColor.red).abs()},"),
-                          Text(
-                              "🟩 was off by ${(goalColor.green - userColor.green).abs()}, and"),
-                          Text(
-                              "🟦 was off by ${(goalColor.blue - userColor.blue).abs()}"),
-                        ],
-                      ),
-                    ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          // Calculate the max height for the SplitColoredBoxWidget
+          double maxHeight = constraints.maxHeight -
+              440; // Adjust the subtracted value based on your other elements
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: maxHeight, // Set the maxHeight here
+                    ),
+                    child: SplitColoredBoxWidget(
+                      goalColor: goalColor,
+                      userColor: userColor,
+                    ),
                   ),
-                ),
-                const Spacer(),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FinishTutorialPage(),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                            "When you finish a round, you'll get your score and how far off your guess was."),
+                        const SizedBox(
+                          height: 16,
                         ),
-                      );
-                    },
-                    child: const Text("Ok!"),
+                        Text("In this case, you got $score points!"),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                "🟥 was off by ${(goalColor.red - userColor.red).abs()},"),
+                            Text(
+                                "🟩 was off by ${(goalColor.green - userColor.green).abs()}, and"),
+                            Text(
+                                "🟦 was off by ${(goalColor.blue - userColor.blue).abs()}"),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-              ],
+                  const Spacer(),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FinishTutorialPage(),
+                          ),
+                        );
+                      },
+                      child: const Text("Ok!"),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
