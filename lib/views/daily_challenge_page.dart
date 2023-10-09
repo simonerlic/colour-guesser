@@ -209,9 +209,6 @@ class _DailyChallengePageState extends State<DailyChallengePage>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onLongPress: () {
-                        _resetDate(context);
-                      },
                       child: Icon(Icons.tune_rounded,
                           size: 28,
                           color:
