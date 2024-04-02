@@ -2,4 +2,6 @@
 
 Think you know colours? Can you get the RGB values of one by eye? Now's your chance to test yourself!
 
-## More to be added soon!
+## Also availiable on:
+[Apple App Store](https://apps.apple.com/us/app/prismatic-the-colour-game/id6456845530)
+[Google Play Store](https://apps.apple.com/us/app/prismatic-the-colour-game/id6456845530)
